@@ -4,18 +4,6 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-
-import commands.CloseConnection;
-import commands.DisableBuzzer;
-import commands.EnableAntennas;
-import commands.EnableBuzzer;
-import commands.ReaderTags;
-import commands.RequestStatusAntenna;
-import commands.RequestStatusPowerAntenna;
-import commands.RequestStatusScanTime;
-import commands.ResquestStatusBuzzer;
-import commands.SetPowerControl;
-import commands.SetScanTime;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
 import utils.ConnectReader;
@@ -46,12 +34,6 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 		return connector.hasResponse();
 	}
 
-	@Override
-	public void closeConnection() throws UnknownHostException, IOException {
-		this.command = new CloseConnection();
-		this.command.execute();
-		
-	}
 
 	@Override
 	public void getTagStringRepresentation() throws UnknownHostException, IOException {
@@ -70,8 +52,23 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	}
 
 	@Override
-	public List<TagAntenna> getTagsList() {
+	public List<TagAntenna> getTagsList() {		
 		return tags;
+	}
+
+	@Override
+	public void captureTagsObject() throws UnknownHostException, IOException {
+		TagAntenna tmp;
+		tmp = new TagAntenna(this.getResponse());
+		
+		if (tags.contains(tmp)) {
+			int index = tags.indexOf(tmp);
+			tmp = tags.get(index);
+			tmp.setCountReader(tmp.getCountReader()+ 1L);
+		} else {
+			tags.add(tmp);
+		}
+		
 	}
 
 }

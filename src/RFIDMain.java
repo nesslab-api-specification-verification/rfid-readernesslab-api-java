@@ -1,8 +1,8 @@
 	
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
+import commands.CloseConnection;
 import commands.EnableBuzzer;
 import commands.ReaderTags;
 import commands.RequestStatusAntenna;
@@ -42,7 +42,7 @@ public class RFIDMain {
 				api.getTagStringRepresentation();	
 			}
 			
-			api.closeConnection();
+			api.executeAction(new CloseConnection());
 
 		} catch (UnknownHostException e) {
 			System.err.println("Não encontro o host: " + OperationUtil.IP_READER_NESSLAB);

@@ -39,7 +39,11 @@ public class ConnectReader {
 	}
 	
 	public String getResponse() throws IOException{
-		return in.readLine();
+		if(hasResponse()){
+			return in.readLine();
+		} else {
+			return "No answer was found.";
+		}
 	}
 	
 	public boolean hasResponse() throws IOException{

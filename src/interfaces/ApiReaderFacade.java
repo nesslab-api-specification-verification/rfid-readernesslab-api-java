@@ -14,9 +14,9 @@ public interface ApiReaderFacade {
 	
 	boolean hasResponse() throws UnknownHostException, IOException;
 	
-	void closeConnection() throws UnknownHostException, IOException;
-	
 	void getTagStringRepresentation() throws UnknownHostException, IOException;
 	
 	List<TagAntenna> getTagsList();
+	
+	void captureTagsObject() throws UnknownHostException, IOException;
 }

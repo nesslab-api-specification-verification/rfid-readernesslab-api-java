@@ -1,8 +1,5 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class OperationUtil {
 	
 	public static final String BUZZER_ON = ">x b 1 /r/n";

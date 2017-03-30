@@ -10,6 +10,9 @@ public class OperationUtil {
 	public static final String POWER_CONTROL_STATUS = ">y p /r/n";
 	public static final String READ_TAGS = "read antenna\r\n";
 	public static final String READ_TAGS_END_MESSAGE = ">f \r\n";
+	public static final String CONTINUE_MODE_ON = ">x c 1 \r\n";
+	public static final String CONTINUE_MODE_OFF = ">x c 0 \r\n";
+	public static final String CONTINUE_MODE_STATUS = ">y c \r\n";
 	public static final String IP_READER_NESSLAB = "192.168.0.231";
 	public static final int PORT_READER_NESSLAB = 5578;
 	

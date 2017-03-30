@@ -4,8 +4,10 @@ import java.net.UnknownHostException;
 
 import commands.CloseConnection;
 import commands.EnableBuzzer;
+import commands.EnableContinueMode;
 import commands.ReaderTags;
 import commands.RequestStatusAntenna;
+import commands.RequestStatusMode;
 import commands.RequestStatusPowerAntenna;
 import commands.ResquestStatusBuzzer;
 import commands.SetPowerControl;
@@ -25,6 +27,8 @@ public class RFIDMain {
 
 			api.executeAction(new EnableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
+			api.executeAction(new EnableContinueMode());
+			
 			api.executeAction(new ResquestStatusBuzzer());
 			System.out.println("status buzzer: " + api.getResponse());
 			
@@ -33,6 +37,9 @@ public class RFIDMain {
 			
 			api.executeAction(new RequestStatusPowerAntenna());
 			System.out.println("status scan time enable: "+ api.getResponse());
+			
+			api.executeAction(new RequestStatusMode());
+			System.out.println("continue mode: "+ api.getResponse());
 			
 			
 			api.executeAction(new ReaderTags());

@@ -18,7 +18,7 @@ public class SetPowerControl implements Command {
 
 	@Override
 	public void execute() throws UnknownHostException, IOException {
-		connectReader = ConnectReader.getInstance(OperationUtil.IP_READER_NESSLAB, OperationUtil.PORT_READER_NESSLAB);
+		connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		connectReader.send(OperationUtil.setPowerControl(power));
 		
 	}

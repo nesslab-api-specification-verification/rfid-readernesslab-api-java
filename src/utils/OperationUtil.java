@@ -13,8 +13,16 @@ public class OperationUtil {
 	public static final String CONTINUE_MODE_ON = ">x c 1 \r\n";
 	public static final String CONTINUE_MODE_OFF = ">x c 0 \r\n";
 	public static final String CONTINUE_MODE_STATUS = ">y c \r\n";
-	public static final String IP_READER_NESSLAB = "192.168.0.231";
+	public static final String IP_READER_NESSLAB_DEFAULT = "192.168.10.91";
+	public static final String GET_IP_VALUE = ">y r / r/ n ";
 	public static final int PORT_READER_NESSLAB = 5578;
+	
+	private static String ipReaderNessLab;
+	
+	/*
+	 * Verificar se a porta é estática
+	 * Verificar se protocolo é único para todo NESSLAB.
+	 * */
 	
 	
 	public static String setScanTime(long time){
@@ -24,6 +32,10 @@ public class OperationUtil {
 	
 	public static String setPowerControl(String power){
 		return ">x p "+ power + "\r\n";
+	}
+	
+	public static String setIpAdress(String ip){
+		return ">x r"+ ip + "/r/n";
 	}
 	
 	
@@ -64,4 +76,12 @@ public class OperationUtil {
 			return "invalid command.";
 		}
 	}
+	
+ public static void setIpReaderNesslab(String ipReaderNesslab){
+	 ipReaderNessLab = ipReaderNesslab;
+ }
+ 
+ public static String getIpReaderNesslab(){
+	 return ipReaderNessLab;	
+ }
 }

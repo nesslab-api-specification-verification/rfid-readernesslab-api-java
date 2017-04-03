@@ -18,7 +18,7 @@ public class SetScanTime implements Command {
 
 	@Override
 	public void execute() throws UnknownHostException, IOException {
-		this.connectReader = ConnectReader.getInstance(OperationUtil.IP_READER_NESSLAB, OperationUtil.PORT_READER_NESSLAB);
+		this.connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		this.connectReader.send(OperationUtil.setScanTime(time));
 	}
 

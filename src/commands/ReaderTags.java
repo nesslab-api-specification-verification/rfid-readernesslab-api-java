@@ -13,7 +13,7 @@ public class ReaderTags implements Command {
 	
 	@Override
 	public void execute() throws UnknownHostException, IOException {
-		connectReader = ConnectReader.getInstance(OperationUtil.IP_READER_NESSLAB, OperationUtil.PORT_READER_NESSLAB);
+		connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		this.connectReader.send(OperationUtil.READ_TAGS);
 		this.connectReader.send(OperationUtil.READ_TAGS_END_MESSAGE);
 		

@@ -27,6 +27,7 @@ public class ConnectReader {
 					getInputStream())));
 			connectReader.setOut(new PrintWriter(connectReader.getConnection()
 					.getOutputStream(), true));
+			System.out.println("The reader is connected.");
 			
 			return connectReader;
 		} else {

@@ -23,7 +23,7 @@ public class RFIDMain {
 			
 			/* The class ApiReaderNesslab to be instantiated, a 
 			 * new connection with the Nesslab is opened. */
-			ApiReaderFacade api = new ApiReaderNesslab();
+			ApiReaderFacade api = new ApiReaderNesslab("192.168.0.231");
 
 			api.executeAction(new EnableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
@@ -36,7 +36,7 @@ public class RFIDMain {
 			System.out.println("status antennas enable: "+ api.getResponse());
 			
 			api.executeAction(new RequestStatusPowerAntenna());
-			System.out.println("status scan time enable: "+ api.getResponse());
+			System.out.println("power: "+ api.getResponse());
 			
 			api.executeAction(new RequestStatusMode());
 			System.out.println("continue mode: "+ api.getResponse());
@@ -52,10 +52,10 @@ public class RFIDMain {
 			api.executeAction(new CloseConnection());
 
 		} catch (UnknownHostException e) {
-			System.err.println("Não encontro o host: " + OperationUtil.IP_READER_NESSLAB);
+			System.err.println("Host not found: " + OperationUtil.getIpReaderNesslab());
 			System.exit(1);
 		} catch (IOException e) {
-			System.err.println("Não foi possível a ligação a: "+ OperationUtil.IP_READER_NESSLAB);
+			System.err.println("Don't possible the conection: "+ OperationUtil.getIpReaderNesslab());
 			System.exit(1);
 		}
 	}

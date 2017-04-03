@@ -12,24 +12,33 @@ import utils.TagAntenna;
 
 public class ApiReaderNesslab implements ApiReaderFacade {
 	
-	private Command command;
 	private static List<TagAntenna> tags = new ArrayList<>();
+	
+	
+	public ApiReaderNesslab() {
+		OperationUtil.setIpReaderNesslab(OperationUtil.IP_READER_NESSLAB_DEFAULT);
+	}
+	
+	public ApiReaderNesslab(String ip){
+		OperationUtil.setIpReaderNesslab(ip);
+	}
+	
 
 	@Override
 	public void executeAction(Command command) throws UnknownHostException, IOException {
-		this.command.execute();
+		command.execute();
 	}
 
 	@Override
 	public String getResponse() throws UnknownHostException, IOException {
-		ConnectReader connector = ConnectReader.getInstance(OperationUtil.IP_READER_NESSLAB, 
+		ConnectReader connector = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), 
 				OperationUtil.PORT_READER_NESSLAB);
 		return connector.getResponse();
 	}
 
 	@Override
 	public boolean hasResponse() throws UnknownHostException, IOException {
-		ConnectReader connector = ConnectReader.getInstance(OperationUtil.IP_READER_NESSLAB, 
+		ConnectReader connector = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), 
 				OperationUtil.PORT_READER_NESSLAB);
 		return connector.hasResponse();
 	}

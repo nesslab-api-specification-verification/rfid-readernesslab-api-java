@@ -8,8 +8,7 @@ public class OperationUtil {
 	public static final String ANTENNA_STATUS = ">y e /r/n";
 	public static final String SCANTIME_STATUS = ">y t /r/n";
 	public static final String POWER_CONTROL_STATUS = ">y p /r/n";
-	public static final String READ_TAGS = "read antenna\r\n";
-	public static final String READ_TAGS_END_MESSAGE = ">f \r\n";
+	public static final String READ_TAGS = ">f \r\n";
 	public static final String CONTINUE_MODE_ON = ">x c 1 \r\n";
 	public static final String CONTINUE_MODE_OFF = ">x c 0 \r\n";
 	public static final String CONTINUE_MODE_STATUS = ">y c \r\n";

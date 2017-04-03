@@ -15,7 +15,6 @@ public class ReaderTags implements Command {
 	public void execute() throws UnknownHostException, IOException {
 		connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		this.connectReader.send(OperationUtil.READ_TAGS);
-		this.connectReader.send(OperationUtil.READ_TAGS_END_MESSAGE);
 		
 	}
 

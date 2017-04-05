@@ -2,7 +2,6 @@ package utils;
 
 
 /**
- * TODO: Tratar todas as respostas de forma legível.
  * This class should translate all responses of requests in reader.
  * */
 public class TranslateResponse {
@@ -18,6 +17,8 @@ public class TranslateResponse {
 				return antennaStatusResponse(response);
 			} else if(response.contains(">p")){
 				return powerResponse(response);
+			} else if(response.contains(">t")){
+				return scanTimeResponse(response);
 			} else {
 				return response;
 			}
@@ -38,6 +39,11 @@ public class TranslateResponse {
 		} else {
 			return "buzzer is disabled";
 		}
+	}
+	
+	private static String scanTimeResponse(String response){
+		String[] message = response.split("t");
+		return "scan time is " + message[1] + "ms";
 	}
 	
 	private static String antennaStatusResponse(String response){

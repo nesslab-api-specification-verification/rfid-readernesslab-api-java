@@ -10,9 +10,11 @@ public class TagAntenna {
 	public TagAntenna(String uniqID) {
 		this.uniqID = uniqID;
 		String[] tagANDantena = this.uniqID.split("T");
-		this.antenna = tagANDantena[0];
-		this.tagRFID = tagANDantena[1];
-		this.countReader = 1;
+		if(tagANDantena.length == 2){
+			this.antenna = tagANDantena[0];
+			this.tagRFID = tagANDantena[1];
+			this.countReader = 1;
+		}
 	}
 
 	public String getAntenna() {

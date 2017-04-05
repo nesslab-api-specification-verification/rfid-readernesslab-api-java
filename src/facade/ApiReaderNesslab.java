@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import exceptions.SessionReaderException;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
 import utils.ConnectReader;
@@ -14,6 +16,7 @@ import utils.TranslateResponse;
 public class ApiReaderNesslab implements ApiReaderFacade {
 	
 	private static List<TagAntenna> tags = new ArrayList<>();
+	private final String CODE_SUCESS_INVENTORY = "9C01";
 	
 	
 	public ApiReaderNesslab() {
@@ -46,17 +49,23 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 
 
 	@Override
-	public void getTagStringRepresentation() throws UnknownHostException, IOException {
+	public void getTagStringRepresentation() throws UnknownHostException, IOException, SessionReaderException {
 		TagAntenna tmp;
-		tmp = new TagAntenna(this.getResponse());
-		
-		if (tags.contains(tmp)) {
-			int index = tags.indexOf(tmp);
-			tmp = tags.get(index);
-			tmp.setCountReader(tmp.getCountReader()+ 1L);
+		String response = this.getResponse();
+		//System.out.println(this.getResponse());
+		if(!response.equals(CODE_SUCESS_INVENTORY)){
+			tmp = new TagAntenna(response);			
+			if (tags.contains(tmp)) {
+				int index = tags.indexOf(tmp);
+				tmp = tags.get(index);
+				tmp.setCountReader(tmp.getCountReader()+ 1L);
+			} else {
+				tags.add(tmp);
+				System.out.println("Antenna: "+ tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
+			}
 		} else {
-			tags.add(tmp);
-			System.out.println("Antenna: "+ tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
+			System.out.println("lancou!");
+			throw new SessionReaderException("Session memory is full.");
 		}
 		
 	}
@@ -67,16 +76,20 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	}
 
 	@Override
-	public void captureTagsObject() throws UnknownHostException, IOException {
+	public void captureTagsObject() throws UnknownHostException, IOException, SessionReaderException {
 		TagAntenna tmp;
-		tmp = new TagAntenna(this.getResponse());
-		
-		if (tags.contains(tmp)) {
-			int index = tags.indexOf(tmp);
-			tmp = tags.get(index);
-			tmp.setCountReader(tmp.getCountReader()+ 1L);
+		String response = this.getResponse();
+		tmp = new TagAntenna(response);
+		if(!response.equals(CODE_SUCESS_INVENTORY)){
+			if (tags.contains(tmp)) {
+				int index = tags.indexOf(tmp);
+				tmp = tags.get(index);
+				tmp.setCountReader(tmp.getCountReader()+ 1L);
+			} else {
+				tags.add(tmp);
+			}
 		} else {
-			tags.add(tmp);
+			throw new SessionReaderException("Session memory is full.");
 		}
 		
 	}

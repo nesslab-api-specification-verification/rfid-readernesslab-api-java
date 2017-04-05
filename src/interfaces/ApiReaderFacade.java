@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import exceptions.SessionReaderException;
 import utils.TagAntenna;
 
 public interface ApiReaderFacade {
@@ -14,11 +15,11 @@ public interface ApiReaderFacade {
 	
 	boolean hasResponse() throws UnknownHostException, IOException;
 	
-	void getTagStringRepresentation() throws UnknownHostException, IOException;
+	void getTagStringRepresentation() throws UnknownHostException, IOException, SessionReaderException;
 	
 	List<TagAntenna> getTagsList();
 	
-	void captureTagsObject() throws UnknownHostException, IOException;
+	void captureTagsObject() throws UnknownHostException, IOException, SessionReaderException;
 	
 	String getTranslatedResponse() throws UnknownHostException, IOException;
 }

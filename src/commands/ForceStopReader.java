@@ -7,15 +7,14 @@ import interfaces.Command;
 import utils.ConnectReader;
 import utils.OperationUtil;
 
-public class ReaderTags implements Command {
-
-	private ConnectReader connectReader;
+public class ForceStopReader implements Command {
 	
+	private ConnectReader connectReader;
+
 	@Override
 	public void execute() throws UnknownHostException, IOException {
 		connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
-		this.connectReader.send(OperationUtil.READ_TAGS_INVENTORY);
-		
+		connectReader.send(OperationUtil.FORCE_STOP_READER);		
 	}
 
 }

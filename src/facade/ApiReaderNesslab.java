@@ -9,6 +9,7 @@ import interfaces.Command;
 import utils.ConnectReader;
 import utils.OperationUtil;
 import utils.TagAntenna;
+import utils.TranslateResponse;
 
 public class ApiReaderNesslab implements ApiReaderFacade {
 	
@@ -78,6 +79,11 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 			tags.add(tmp);
 		}
 		
+	}
+
+	@Override
+	public String getTranslatedResponse() throws UnknownHostException, IOException {
+		return TranslateResponse.translate(this.getResponse());
 	}
 
 }

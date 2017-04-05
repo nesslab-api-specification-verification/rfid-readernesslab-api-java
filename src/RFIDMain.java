@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import commands.CloseConnection;
+import commands.DisableBuzzer;
 import commands.EnableBuzzer;
 import commands.EnableContinueMode;
 import commands.ReaderTags;
@@ -23,23 +24,23 @@ public class RFIDMain {
 			
 			/* The class ApiReaderNesslab to be instantiated, a 
 			 * new connection with the Nesslab is opened. */
-			ApiReaderFacade api = new ApiReaderNesslab("192.168.0.231");
+			ApiReaderFacade api = new ApiReaderNesslab("192.168.1.231");
 
-			api.executeAction(new EnableBuzzer());		
+			api.executeAction(new DisableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
 			api.executeAction(new EnableContinueMode());
 			
 			api.executeAction(new ResquestStatusBuzzer());
-			System.out.println("status buzzer: " + api.getResponse());
+			System.out.println(api.getTranslatedResponse());
 			
 			api.executeAction(new RequestStatusAntenna());
-			System.out.println("status antennas enable: "+ api.getResponse());
+			System.out.println(api.getTranslatedResponse());
 			
 			api.executeAction(new RequestStatusPowerAntenna());
-			System.out.println("power: "+ api.getResponse());
+			System.out.println(api.getTranslatedResponse());
 			
 			api.executeAction(new RequestStatusMode());
-			System.out.println("continue mode: "+ api.getResponse());
+			System.out.println(api.getTranslatedResponse());
 			
 			
 			api.executeAction(new ReaderTags());

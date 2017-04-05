@@ -19,4 +19,6 @@ public interface ApiReaderFacade {
 	List<TagAntenna> getTagsList();
 	
 	void captureTagsObject() throws UnknownHostException, IOException;
+	
+	String getTranslatedResponse() throws UnknownHostException, IOException;
 }

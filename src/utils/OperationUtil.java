@@ -17,15 +17,10 @@ public class OperationUtil {
 	public static final String IP_READER_NESSLAB_DEFAULT = "192.168.10.91";
 	public static final String GET_IP_VALUE = ">y r / r/ n ";
 	public static final String FORCE_STOP_READER = ">3 / r/n";
+	public static final String MULTI_TAG_READ_RESET = ">g /r /n";
 	public static final int PORT_READER_NESSLAB = 5578;
 	
 	private static String ipReaderNessLab;
-	
-	/*
-	 * Verificar se a porta é estática
-	 * Verificar se protocolo é único para todo NESSLAB.
-	 * */
-	
 	
 	public static String setScanTime(long time){
 		String timeMS = String.valueOf(time);

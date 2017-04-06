@@ -5,14 +5,14 @@ import java.net.UnknownHostException;
 import commands.CloseConnection;
 import commands.DisableBuzzer;
 import commands.EnableContinueMode;
-import commands.ForceStopReader;
+import commands.ReaderTagsReset;
 import commands.ReaderTags;
 import commands.RequestStatusAntenna;
 import commands.RequestStatusMode;
 import commands.RequestStatusPowerAntenna;
 import commands.ResquestStatusBuzzer;
 import commands.SetPowerControl;
-import exceptions.SessionReaderException;
+import exceptions.SessionFullException;
 import facade.ApiReaderNesslab;
 import interfaces.ApiReaderFacade;
 import utils.*;
@@ -56,12 +56,9 @@ public class RFIDMain {
 				/* tags is printed in pattern: Antenna : 9 Tag: 00000002*/
 				try {
 					api.getTagStringRepresentation();
-				} catch (SessionReaderException e) {
-
-					System.out.println("SESSÃO CHEIA.");
-					api.executeAction(new ForceStopReader());
-					//api.executeAction(new ReaderTags());
-				}	
+				} catch (SessionFullException e) {
+					api.executeAction(new ReaderTagsReset());
+				}
 			}
 			
 			api.executeAction(new CloseConnection());

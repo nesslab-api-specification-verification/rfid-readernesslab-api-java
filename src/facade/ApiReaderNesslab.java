@@ -5,7 +5,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.SessionReaderException;
+import exceptions.SessionFullException;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
 import utils.ConnectReader;
@@ -17,6 +17,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	
 	private static List<TagAntenna> tags = new ArrayList<>();
 	private final String CODE_SUCESS_INVENTORY = "9C01";
+	private final String CODE_STOP_READ = "9S00";
 	
 	
 	public ApiReaderNesslab() {
@@ -49,11 +50,14 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 
 
 	@Override
-	public void getTagStringRepresentation() throws UnknownHostException, IOException, SessionReaderException {
+	public void getTagStringRepresentation() throws UnknownHostException, IOException, 
+	SessionFullException {
 		TagAntenna tmp;
 		String response = this.getResponse();
-		//System.out.println(this.getResponse());
-		if(!response.equals(CODE_SUCESS_INVENTORY)){
+		System.out.println(response);
+		if(response.equals(CODE_SUCESS_INVENTORY)){
+			throw new SessionFullException("Session memory is full.");
+		} else {
 			tmp = new TagAntenna(response);			
 			if (tags.contains(tmp)) {
 				int index = tags.indexOf(tmp);
@@ -63,10 +67,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 				tags.add(tmp);
 				System.out.println("Antenna: "+ tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
 			}
-		} else {
-			System.out.println("lancou!");
-			throw new SessionReaderException("Session memory is full.");
-		}
+		} 
 		
 	}
 
@@ -76,7 +77,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	}
 
 	@Override
-	public void captureTagsObject() throws UnknownHostException, IOException, SessionReaderException {
+	public void captureTagsObject() throws UnknownHostException, IOException, SessionFullException {
 		TagAntenna tmp;
 		String response = this.getResponse();
 		tmp = new TagAntenna(response);
@@ -89,7 +90,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 				tags.add(tmp);
 			}
 		} else {
-			throw new SessionReaderException("Session memory is full.");
+			throw new SessionFullException("Session memory is full.");
 		}
 		
 	}

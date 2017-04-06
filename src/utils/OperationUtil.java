@@ -10,7 +10,6 @@ public class OperationUtil {
 	public static final String POWER_CONTROL_STATUS = ">y p /r/n";
 	public static final String READ_TAGS_INVENTORY = ">f \r\n";
 	public static final String READ_TAGS = ">r \r\n";
-	
 	public static final String CONTINUE_MODE_ON = ">x c 1 \r\n";
 	public static final String CONTINUE_MODE_OFF = ">x c 0 \r\n";
 	public static final String CONTINUE_MODE_STATUS = ">y c \r\n";

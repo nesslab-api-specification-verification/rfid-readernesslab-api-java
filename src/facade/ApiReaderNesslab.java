@@ -17,7 +17,6 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	
 	private static List<TagAntenna> tags = new ArrayList<>();
 	private final String CODE_SUCESS_INVENTORY = "9C01";
-	private final String CODE_STOP_READ = "9S00";
 	
 	
 	public ApiReaderNesslab() {
@@ -54,7 +53,6 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	SessionFullException {
 		TagAntenna tmp;
 		String response = this.getResponse();
-		System.out.println(response);
 		if(response.equals(CODE_SUCESS_INVENTORY)){
 			throw new SessionFullException("Session memory is full.");
 		} else {
@@ -81,7 +79,9 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 		TagAntenna tmp;
 		String response = this.getResponse();
 		tmp = new TagAntenna(response);
-		if(!response.equals(CODE_SUCESS_INVENTORY)){
+		if(response.equals(CODE_SUCESS_INVENTORY)){
+			throw new SessionFullException("Session memory is full.");
+		} else {
 			if (tags.contains(tmp)) {
 				int index = tags.indexOf(tmp);
 				tmp = tags.get(index);
@@ -89,9 +89,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 			} else {
 				tags.add(tmp);
 			}
-		} else {
-			throw new SessionFullException("Session memory is full.");
-		}
+		} 
 		
 	}
 

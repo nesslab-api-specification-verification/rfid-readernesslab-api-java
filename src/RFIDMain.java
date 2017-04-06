@@ -3,8 +3,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import commands.CloseConnection;
-import commands.DisableBuzzer;
-import commands.EnableContinueMode;
+import commands.DisableContinueMode;
+import commands.EnableBuzzer;
 import commands.ReaderTagsReset;
 import commands.ReaderTags;
 import commands.RequestStatusAntenna;
@@ -31,9 +31,9 @@ public class RFIDMain {
 //			api.executeAction(new RequestStatusScanTime());
 //			System.out.println(api.getTranslatedResponse());
 
-			api.executeAction(new DisableBuzzer());		
+			api.executeAction(new EnableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
-			api.executeAction(new EnableContinueMode());
+			api.executeAction(new DisableContinueMode());
 ////			
 
 //			

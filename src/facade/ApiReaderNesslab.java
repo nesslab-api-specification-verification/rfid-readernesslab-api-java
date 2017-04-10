@@ -17,7 +17,6 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	
 	private static List<TagAntenna> tags = new ArrayList<>();
 	private final String CODE_SUCESS_INVENTORY = "9C01";
-	private final String CODE_SUCESS_READ = "9C91";
 	
 	
 	public ApiReaderNesslab() {

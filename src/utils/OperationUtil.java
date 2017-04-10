@@ -17,6 +17,7 @@ public class OperationUtil {
 	public static final String GET_IP_VALUE = ">y r / r/ n ";
 	public static final String FORCE_STOP_READER = ">3 / r/n";
 	public static final String MULTI_TAG_READ_RESET = ">g /r /n";
+	public static final String ONE_TAG_READ = ">e /r /n";
 	public static final int PORT_READER_NESSLAB = 5578;
 	
 	private static String ipReaderNessLab;

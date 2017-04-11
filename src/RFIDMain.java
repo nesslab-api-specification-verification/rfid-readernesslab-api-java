@@ -62,7 +62,6 @@ public class RFIDMain {
 				try {
 					api.getTagStringRepresentation();
 					
-					
 				} catch (SessionFullException e) {
 					api.executeAction(new ReaderTagsReset());
 				}

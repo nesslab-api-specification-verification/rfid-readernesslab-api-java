@@ -2,23 +2,17 @@ package facade;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.List;
 
 import exceptions.SessionFullException;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
 import utils.ConnectReader;
-import utils.ExportJsonFormat;
 import utils.OperationUtil;
 import utils.TagAntenna;
 import utils.TranslateResponse;
 
 public class ApiReaderNesslab implements ApiReaderFacade {
-	
-	private static List<TagAntenna> tags = new ArrayList<>();
-	private final String CODE_SUCESS_INVENTORY = "9C01";
-	
 	
 	public ApiReaderNesslab() {
 		OperationUtil.setIpReaderNesslab(OperationUtil.IP_READER_NESSLAB_DEFAULT);
@@ -52,51 +46,29 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	@Override
 	public void getTagStringRepresentation() throws UnknownHostException, IOException, 
 	SessionFullException {
-		TagAntenna tmp;
-		String response = this.getResponse();
-		if(response.equals(CODE_SUCESS_INVENTORY)){
-			throw new SessionFullException("Session memory is full.");
-		} else {
-			tmp = new TagAntenna(response);			
-			if (tags.contains(tmp)) {
-				int index = tags.indexOf(tmp);
-				tmp = tags.get(index);
-				tmp.setCountReader(tmp.getCountReader()+ 1L);
-			} else {
-				tags.add(tmp);
-				System.out.println("Antenna: "+ tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
-			}
-		} 
-		
+		String response = getResponse();
+		utils.CaptureTagsRepresentation.getStringRepresentation(response);
 	}
 
 	@Override
 	public List<TagAntenna> getTagsList() {		
-		return tags;
+		return utils.CaptureTagsRepresentation.getTags();
 	}
 
 	@Override
 	public void captureTagsObject() throws UnknownHostException, IOException, SessionFullException {
-		TagAntenna tmp;
-		String response = this.getResponse();
-		tmp = new TagAntenna(response);
-		if(response.equals(CODE_SUCESS_INVENTORY)){
-			throw new SessionFullException("Session memory is full.");
-		} else {
-			if (tags.contains(tmp)) {
-				int index = tags.indexOf(tmp);
-				tmp = tags.get(index);
-				tmp.setCountReader(tmp.getCountReader()+ 1L);
-			} else {
-				tags.add(tmp);
-			}
-		} 
-		
+		String response = getResponse();
+		utils.CaptureTagsRepresentation.getObjectRepresentation(response);
 	}
 
 	@Override
 	public String getTranslatedResponse() throws UnknownHostException, IOException {
 		return TranslateResponse.translate(this.getResponse());
+	}
+
+	@Override
+	public String getJsonRepresentation() {
+		return utils.CaptureTagsRepresentation.getJsonRepresentation();
 	}
 
 }

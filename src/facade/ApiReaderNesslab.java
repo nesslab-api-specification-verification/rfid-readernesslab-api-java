@@ -9,6 +9,7 @@ import exceptions.SessionFullException;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
 import utils.ConnectReader;
+import utils.ExportJsonFormat;
 import utils.OperationUtil;
 import utils.TagAntenna;
 import utils.TranslateResponse;

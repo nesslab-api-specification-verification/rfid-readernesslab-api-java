@@ -1,10 +1,15 @@
 	
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.List;
+
+import com.google.gson.Gson;
 
 import commands.CloseConnection;
+import commands.DisableBuzzer;
 import commands.DisableContinueMode;
 import commands.EnableBuzzer;
+import commands.EnableContinueMode;
 import commands.ReaderTagsReset;
 import commands.ReaderTags;
 import commands.RequestStatusAntenna;
@@ -31,9 +36,9 @@ public class RFIDMain {
 //			api.executeAction(new RequestStatusScanTime());
 //			System.out.println(api.getTranslatedResponse());
 
-			api.executeAction(new EnableBuzzer());		
+			api.executeAction(new DisableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
-			api.executeAction(new DisableContinueMode());
+			api.executeAction(new EnableContinueMode());
 ////			
 
 //			
@@ -56,6 +61,8 @@ public class RFIDMain {
 				/* tags is printed in pattern: Antenna : 9 Tag: 00000002*/
 				try {
 					api.getTagStringRepresentation();
+					
+					
 				} catch (SessionFullException e) {
 					api.executeAction(new ReaderTagsReset());
 				}

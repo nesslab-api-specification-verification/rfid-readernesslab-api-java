@@ -21,4 +21,6 @@ public interface ApiReaderFacade {
 	void captureTagsObject() throws UnknownHostException, IOException, SessionFullException;
 	
 	String getTranslatedResponse() throws UnknownHostException, IOException;
+	
+	String getJsonRepresentation();
 }

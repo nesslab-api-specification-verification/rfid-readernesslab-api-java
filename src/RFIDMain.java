@@ -54,7 +54,10 @@ public class RFIDMain {
 			while (api.hasResponse()) {
 				/* tags is printed in pattern: Antenna : 9 Tag: 00000002*/
 				try {
-					api.getTagStringRepresentation();
+					api.captureTagsObject();
+					if(api.hasNewTag()){
+						System.out.println(api.getTagUniqueJsonRepresentation());
+					}
 					
 				} catch (SessionFullException e) {
 					api.executeAction(new ReaderTagsReset());

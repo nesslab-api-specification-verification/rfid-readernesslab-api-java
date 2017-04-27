@@ -7,6 +7,7 @@ import java.util.List;
 import exceptions.SessionFullException;
 import interfaces.ApiReaderFacade;
 import interfaces.Command;
+import utils.CaptureTagsRepresentation;
 import utils.ConnectReader;
 import utils.OperationUtil;
 import utils.TagAntenna;
@@ -21,8 +22,12 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	public ApiReaderNesslab(String ip){
 		OperationUtil.setIpReaderNesslab(ip);
 	}
-	
 
+	/**
+	 * This executeAction is responsible for executing all commands.
+	 * @param command is a command of API.
+	 * @throws UnknownHostException Is trown when the host not found.
+	 * */
 	@Override
 	public void executeAction(Command command) throws UnknownHostException, IOException {
 		command.execute();
@@ -46,28 +51,8 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	@Override
 	public void getTagStringRepresentation() throws UnknownHostException, IOException, 
 	SessionFullException {
-<<<<<<< HEAD
-		TagAntenna tmp;
-		String response = this.getResponse();
-		
-		if(response.equals(CODE_SUCESS_INVENTORY)){
-			throw new SessionFullException("Session memory is full.");
-		} else {
-			tmp = new TagAntenna(response);			
-			if (tags.contains(tmp)) {
-				int index = tags.indexOf(tmp);
-				tmp = tags.get(index);
-				tmp.setCountReader(tmp.getCountReader()+ 1L);
-			} else if (tmp.getAntenna() != null){
-				tags.add(tmp);
-				System.out.println("Antenna: "+ tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
-			}
-		} 
-		
-=======
 		String response = getResponse();
 		utils.CaptureTagsRepresentation.getStringRepresentation(response);
->>>>>>> 65d55ee8f1ac3131306926094fe7a2abc97ec1a0
 	}
 
 	@Override
@@ -89,6 +74,16 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	@Override
 	public String getJsonRepresentation() {
 		return utils.CaptureTagsRepresentation.getJsonRepresentation();
+	}
+
+	@Override
+	public boolean hasNewTag() {
+		return CaptureTagsRepresentation.haveNewTag();
+	}
+
+	@Override
+	public String getTagUniqueJsonRepresentation() {
+		return CaptureTagsRepresentation.getJsonTagUnique();
 	}
 
 }

@@ -23,4 +23,8 @@ public interface ApiReaderFacade {
 	String getTranslatedResponse() throws UnknownHostException, IOException;
 	
 	String getJsonRepresentation();
+	
+	boolean hasNewTag();
+	
+	String getTagUniqueJsonRepresentation();
 }

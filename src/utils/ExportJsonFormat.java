@@ -10,7 +10,7 @@ public class ExportJsonFormat {
 	private static final String TAG_ANTENNA = "antenna";
 	private static final String TAG_RFID = "tag";
 
-	public static String export(List<TagAntenna> tagsSource){
+	public static String exportListTags(List<TagAntenna> tagsSource){
 		JsonArray jsonArray = new JsonArray();	
 		for(TagAntenna tag: tagsSource){
 			JsonObject jsonObject = new JsonObject();
@@ -20,5 +20,12 @@ public class ExportJsonFormat {
 		}
 		
 		return jsonArray.toString();
+	}
+	
+	public static String exportTag(TagAntenna tagAntennaSource){
+		JsonObject json = new JsonObject();
+		json.addProperty(TAG_ANTENNA, tagAntennaSource.getAntenna());
+		json.addProperty(TAG_RFID, tagAntennaSource.getTagRFID());
+		return json.toString();
 	}
 }

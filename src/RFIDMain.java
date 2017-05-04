@@ -3,22 +3,23 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 import com.google.gson.Gson;
-import commands.CloseConnection;
-import commands.DisableBuzzer;
-import commands.DisableContinueMode;
-import commands.EnableBuzzer;
-import commands.EnableContinueMode;
-import commands.ReaderTagsReset;
-import commands.ReaderTags;
-import commands.RequestStatusAntenna;
-import commands.RequestStatusMode;
-import commands.RequestStatusPowerAntenna;
-import commands.ResquestStatusBuzzer;
-import commands.SetPowerControl;
-import exceptions.SessionFullException;
-import facade.ApiReaderNesslab;
-import interfaces.ApiReaderFacade;
-import utils.*;
+
+import api.reader.nesslab.commands.CloseConnection;
+import api.reader.nesslab.commands.DisableBuzzer;
+import api.reader.nesslab.commands.DisableContinueMode;
+import api.reader.nesslab.commands.EnableBuzzer;
+import api.reader.nesslab.commands.EnableContinueMode;
+import api.reader.nesslab.commands.ReaderTags;
+import api.reader.nesslab.commands.ReaderTagsReset;
+import api.reader.nesslab.commands.RequestStatusAntenna;
+import api.reader.nesslab.commands.RequestStatusMode;
+import api.reader.nesslab.commands.RequestStatusPowerAntenna;
+import api.reader.nesslab.commands.ResquestStatusBuzzer;
+import api.reader.nesslab.commands.SetPowerControl;
+import api.reader.nesslab.exceptions.SessionFullException;
+import api.reader.nesslab.facade.ApiReaderNesslab;
+import api.reader.nesslab.interfaces.ApiReaderFacade;
+import api.reader.nesslab.utils.*;
 public class RFIDMain {
 	
 	public static void main(String[] args) {		

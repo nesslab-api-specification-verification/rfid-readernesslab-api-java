@@ -32,7 +32,7 @@ public class RFIDMain {
 //			api.executeAction(new SetScanTime(0L));
 //			api.executeAction(new RequestStatusScanTime());
 //			System.out.println(api.getTranslatedResponse());
-			api.executeAction(new DisableBuzzer());		
+			api.executeAction(new EnableBuzzer());		
 			api.executeAction(new SetPowerControl("250"));
 			api.executeAction(new EnableContinueMode());
 ////			

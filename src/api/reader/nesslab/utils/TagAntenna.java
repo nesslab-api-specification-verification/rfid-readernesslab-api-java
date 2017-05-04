@@ -54,10 +54,10 @@ public class TagAntenna {
 		if (getClass() != obj.getClass())
 			return false;
 		TagAntenna other = (TagAntenna) obj;
-		if (uniqID == null) {
-			if (other.uniqID != null)
+		if (tagRFID == null) {
+			if (other.tagRFID != null)
 				return false;
-		} else if (!uniqID.equals(other.uniqID))
+		} else if (!tagRFID.equals(other.tagRFID))
 			return false;
 		return true;
 	}

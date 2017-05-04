@@ -15,10 +15,18 @@ import api.reader.nesslab.utils.TranslateResponse;
 
 public class ApiReaderNesslab implements ApiReaderFacade {
 	
+
+	/**
+	 * Default constructor, the IP is set according with specification. 
+	 * **/
 	public ApiReaderNesslab() {
 		OperationUtil.setIpReaderNesslab(OperationUtil.IP_READER_NESSLAB_DEFAULT);
 	}
 	
+	/**
+	 * Contructor with ip parameter, when the ip is different of default ip.
+	 * @param command is a command of API.
+	 * */
 	public ApiReaderNesslab(String ip){
 		OperationUtil.setIpReaderNesslab(ip);
 	}

@@ -13,11 +13,13 @@ import api.reader.nesslab.utils.OperationUtil;
 import api.reader.nesslab.utils.TagAntenna;
 import api.reader.nesslab.utils.TranslateResponse;
 
+/**
+ * Layer access to methods of communication and configuration with the RFID Reader Nesslab RF1000.   
+ * */
 public class ApiReaderNesslab implements ApiReaderFacade {
 	
-
 	/**
-	 * Default constructor, the IP is set according with specification. 
+	 * Default constructor, the IP is set according with specification(192.168.10.91). 
 	 * **/
 	public ApiReaderNesslab() {
 		OperationUtil.setIpReaderNesslab(OperationUtil.IP_READER_NESSLAB_DEFAULT);
@@ -139,6 +141,16 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	@Override
 	public String getTagUniqueJsonRepresentation() {
 		return CaptureTagsRepresentation.getJsonTagUnique();
+	}
+
+	/**
+	 * Temporarily clean memory of API for recapture tags.
+	 * @param secondsPeriod is the period witch cleaning must be executed intermittently.  
+	 * */
+	@Override
+	public void clearTemporaryMemory(int secondsPeriod) {
+		CaptureTagsRepresentation.clearMemory(secondsPeriod);
+		
 	}
 
 }

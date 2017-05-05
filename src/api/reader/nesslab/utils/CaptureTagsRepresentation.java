@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import api.reader.nesslab.exceptions.SessionFullException;
 /**
@@ -56,6 +58,18 @@ public class CaptureTagsRepresentation {
 			}
 		}
 
+	}
+	
+	public static void clearMemory(int timeSecondsRange){
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				tags.clear();
+				
+			}
+		}, 0, timeSecondsRange*1000L);
 	}
 
 	public static String getJsonRepresentation() {

@@ -27,5 +27,7 @@ public interface ApiReaderFacade {
 	
 	boolean hasNewTag();
 	
+	void clearTemporaryMemory(int secondsPeriod);
+	
 	String getTagUniqueJsonRepresentation();
 }

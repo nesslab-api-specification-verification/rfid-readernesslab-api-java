@@ -49,6 +49,8 @@ public class RFIDMain {
 			api.executeAction(new RequestStatusMode());
 			System.out.println(api.getTranslatedResponse());
 			
+			api.clearTemporaryMemory(120);//Clean memory of 2 in 2 minutes.
+			
 			
 			api.executeAction(new ReaderTags());
 			

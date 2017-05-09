@@ -16,6 +16,8 @@ public class CaptureTagsRepresentation {
 
 	private static List<TagAntenna> tags = new ArrayList<>();
 	private static final String CODE_SUCESS_INVENTORY = "9C01";
+	private static final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
+	
 	private static String jsonRepresentation = "";
 	private static String jsonTagUnique = "";
 
@@ -23,7 +25,7 @@ public class CaptureTagsRepresentation {
 			throws UnknownHostException, IOException, SessionFullException {
 		TagAntenna tmp;
 		String responseHost = response;
-		if (responseHost.equals(CODE_SUCESS_INVENTORY)) {
+		if (responseHost.equals(CODE_SUCESS_INVENTORY) || response.equals(CODE_ERRO_DUPLICATION_EXECUTION)) {
 			throw new SessionFullException("Session memory is full.");
 		} else {
 			tmp = new TagAntenna(responseHost);
@@ -42,8 +44,9 @@ public class CaptureTagsRepresentation {
 			throws UnknownHostException, IOException, SessionFullException {
 		TagAntenna tmp;
 		String responseHost = response;
+		System.out.println(responseHost);
 		tmp = new TagAntenna(responseHost);
-		if (response.equals(CODE_SUCESS_INVENTORY)) {
+		if (response.equals(CODE_SUCESS_INVENTORY) || response.equals(CODE_ERRO_DUPLICATION_EXECUTION)) {
 			throw new SessionFullException("Session memory is full.");
 		} else {
 			if (tags.contains(tmp)) {

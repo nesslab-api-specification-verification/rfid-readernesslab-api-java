@@ -28,27 +28,7 @@ public class RFIDMain {
 			/* The class ApiReaderNesslab to be instantiated, a 
 			 * new connection with the Nesslab is opened. */
 			ApiReaderFacade api = new ApiReaderNesslab("192.168.1.231");
-			
-//			api.executeAction(new SetScanTime(0L));
-//			api.executeAction(new RequestStatusScanTime());
-//			System.out.println(api.getTranslatedResponse());
-			api.executeAction(new EnableBuzzer());		
-			api.executeAction(new SetPowerControl("250"));
-			api.executeAction(new EnableContinueMode());
-////			
-//			
-			api.executeAction(new ResquestStatusBuzzer());
-			System.out.println(api.getTranslatedResponse());
-			
-			api.executeAction(new RequestStatusAntenna());
-			System.out.println(api.getTranslatedResponse());
-			
-			api.executeAction(new RequestStatusPowerAntenna());
-			System.out.println(api.getTranslatedResponse());
-			
-			api.executeAction(new RequestStatusMode());
-			System.out.println(api.getTranslatedResponse());
-			
+			api.defaultConfiguration();
 			api.clearTemporaryMemory(120);//Clean memory of 2 in 2 minutes.
 			
 			

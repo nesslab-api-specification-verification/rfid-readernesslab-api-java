@@ -30,4 +30,6 @@ public interface ApiReaderFacade {
 	void clearTemporaryMemory(int secondsPeriod);
 	
 	String getTagUniqueJsonRepresentation();
+	
+	void defaultConfiguration() throws UnknownHostException, IOException;
 }

@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import api.reader.nesslab.commands.DisableBuzzer;
+import api.reader.nesslab.commands.EnableContinueMode;
+import api.reader.nesslab.commands.RequestStatusScanTime;
+import api.reader.nesslab.commands.SetPowerControl;
+import api.reader.nesslab.commands.SetScanTime;
 import api.reader.nesslab.exceptions.SessionFullException;
 import api.reader.nesslab.interfaces.ApiReaderFacade;
 import api.reader.nesslab.interfaces.Command;
@@ -151,6 +156,20 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	public void clearTemporaryMemory(int secondsPeriod) {
 		CaptureTagsRepresentation.clearMemory(secondsPeriod);
 		
+	}
+	
+	/**
+	 * To configure api with everyone necessary configuration for default run. 
+	 * The configurarions are: 1ms of scan time, buzzer disabled, power control with 250dbm and continue mode enabled.
+	 * @throws UnknownHostException Is trown when the host not found.
+	 * @throws IOException Is trown when any failure I/O ocurred.
+	 * */
+	@Override
+	public final void defaultConfiguration() throws UnknownHostException, IOException{
+		executeAction(new SetScanTime(1L));
+		executeAction(new DisableBuzzer());		
+		executeAction(new SetPowerControl("250"));
+		executeAction(new EnableContinueMode());
 	}
 
 }

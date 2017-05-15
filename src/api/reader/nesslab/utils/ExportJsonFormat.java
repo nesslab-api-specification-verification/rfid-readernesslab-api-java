@@ -1,6 +1,6 @@
 package api.reader.nesslab.utils;
 
-import java.util.List;
+import java.util.Map;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -10,12 +10,12 @@ public class ExportJsonFormat {
 	private static final String TAG_ANTENNA = "antenna";
 	private static final String TAG_RFID = "tag";
 
-	public static String exportListTags(List<TagAntenna> tagsSource){
+	public static String exportListTags(Map<String, TagAntenna> tagsSource){
 		JsonArray jsonArray = new JsonArray();	
-		for(TagAntenna tag: tagsSource){
+		for(String key: tagsSource.keySet()){
 			JsonObject jsonObject = new JsonObject();
-			jsonObject.addProperty(TAG_ANTENNA, tag.getAntenna());
-			jsonObject.addProperty(TAG_RFID, tag.getTagRFID());
+			jsonObject.addProperty(TAG_ANTENNA, tagsSource.get(key).getAntenna());
+			jsonObject.addProperty(TAG_RFID, tagsSource.get(key).getTagRFID());
 			jsonArray.add(jsonObject);
 		}
 		

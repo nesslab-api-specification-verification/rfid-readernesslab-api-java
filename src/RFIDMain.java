@@ -1,21 +1,10 @@
 	
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.List;
-import com.google.gson.Gson;
 
 import api.reader.nesslab.commands.CloseConnection;
-import api.reader.nesslab.commands.DisableBuzzer;
-import api.reader.nesslab.commands.DisableContinueMode;
-import api.reader.nesslab.commands.EnableBuzzer;
-import api.reader.nesslab.commands.EnableContinueMode;
 import api.reader.nesslab.commands.ReaderTags;
 import api.reader.nesslab.commands.ReaderTagsReset;
-import api.reader.nesslab.commands.RequestStatusAntenna;
-import api.reader.nesslab.commands.RequestStatusMode;
-import api.reader.nesslab.commands.RequestStatusPowerAntenna;
-import api.reader.nesslab.commands.ResquestStatusBuzzer;
-import api.reader.nesslab.commands.SetPowerControl;
 import api.reader.nesslab.exceptions.SessionFullException;
 import api.reader.nesslab.facade.ApiReaderNesslab;
 import api.reader.nesslab.interfaces.ApiReaderFacade;
@@ -29,13 +18,12 @@ public class RFIDMain {
 			 * new connection with the Nesslab is opened. */
 			ApiReaderFacade api = new ApiReaderNesslab("192.168.1.231");
 			api.defaultConfiguration();
-			api.clearTemporaryMemory(120);//Clean memory of 2 in 2 minutes.
+			api.clearTemporaryMemory(200);//Clean memory of 2 in 2 minutes.
 			
 			
 			api.executeAction(new ReaderTags());
 			
 			while (api.hasResponse()) {
-				/* tags is printed in pattern: Antenna : 9 Tag: 00000002*/
 				try {
 					api.captureTagsObject();
 					if(api.hasNewTag()){

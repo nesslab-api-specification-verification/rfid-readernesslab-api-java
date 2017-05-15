@@ -6,7 +6,6 @@ import java.util.List;
 
 import api.reader.nesslab.commands.DisableBuzzer;
 import api.reader.nesslab.commands.EnableContinueMode;
-import api.reader.nesslab.commands.RequestStatusScanTime;
 import api.reader.nesslab.commands.SetPowerControl;
 import api.reader.nesslab.commands.SetScanTime;
 import api.reader.nesslab.exceptions.SessionFullException;
@@ -80,8 +79,10 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	 * Prints in console the string representation of tag captured on format Antenna: 00 Tag: 000000000.
 	 * @throws UnknownHostException Is trown when the host not found.
 	 * @throws IOException Is trown when any failure I/O ocurred.
+	 * @deprecated For reasons of utility. 
 	 * */
 	@Override
+	@Deprecated
 	public void getTagStringRepresentation() throws UnknownHostException, IOException, 
 	SessionFullException {
 		String response = getResponse();

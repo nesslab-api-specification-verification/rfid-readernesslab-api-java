@@ -15,6 +15,7 @@ public interface ApiReaderFacade {
 	
 	boolean hasResponse() throws UnknownHostException, IOException;
 	
+	@Deprecated
 	void getTagStringRepresentation() throws UnknownHostException, IOException, SessionFullException;
 	
 	List<TagAntenna> getTagsList();

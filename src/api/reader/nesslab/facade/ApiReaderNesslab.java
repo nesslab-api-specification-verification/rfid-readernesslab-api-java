@@ -76,20 +76,6 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 
 
 	/**
-	 * Prints in console the string representation of tag captured on format Antenna: 00 Tag: 000000000.
-	 * @throws UnknownHostException Is trown when the host not found.
-	 * @throws IOException Is trown when any failure I/O ocurred.
-	 * @deprecated For reasons of utility. 
-	 * */
-	@Override
-	@Deprecated
-	public void getTagStringRepresentation() throws UnknownHostException, IOException, 
-	SessionFullException {
-		String response = getResponse();
-		api.reader.nesslab.utils.CaptureTagsRepresentation.getStringRepresentation(response);
-	}
-
-	/**
 	 * To return all tags captured by methods getTagStringRepresentation() and captureTagsObject().
 	 * @return Set tag read by methods. 
 	 * @throws UnknownHostException Is trown when the host not found.
@@ -171,6 +157,15 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 		executeAction(new DisableBuzzer());		
 		executeAction(new SetPowerControl("250"));
 		executeAction(new EnableContinueMode());
+	}
+
+	/**
+	 * To return a object representation of each tag read, if haveNewTag() return false, this return to be null.
+	 * @return Tag read.
+	 * */
+	@Override
+	public TagAntenna getTag() {
+		return CaptureTagsRepresentation.getTag();
 	}
 
 }

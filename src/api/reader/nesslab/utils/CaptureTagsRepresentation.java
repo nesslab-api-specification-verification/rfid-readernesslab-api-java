@@ -17,6 +17,7 @@ import api.reader.nesslab.exceptions.SessionFullException;
 public class CaptureTagsRepresentation {
 
 	private static Map<String, TagAntenna> tags;
+	private static TagAntenna tag;
 	private static final String CODE_SUCESS_INVENTORY = "9C01";
 	private static final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
 	private static final String CODE_ERRO_STOP_FORCE = "9S00";
@@ -37,26 +38,6 @@ public class CaptureTagsRepresentation {
 		return getInstanceTags().containsKey(key);
 	}
 
-	@Deprecated
-	public static void getStringRepresentation(String response)
-			throws UnknownHostException, IOException, SessionFullException {
-		TagAntenna tmp;
-		
-		if (response.equals(CODE_SUCESS_INVENTORY) 
-				|| response.equals(CODE_ERRO_DUPLICATION_EXECUTION)
-				|| response.equals(CODE_ERRO_STOP_FORCE)) {
-			throw new SessionFullException("Session memory is full.");
-		} else {
-			tmp = new TagAntenna(response);
-			if (verifyTagExists(tmp.getTagRFID())) {
-				tmp = getInstanceTags().get(tmp.getTagRFID());
-				tmp.setCountReader(tmp.getCountReader() + 1L);
-			} else {
-				getInstanceTags().put(tmp.getTagRFID(), tmp);
-				System.out.println("Antenna: " + tmp.getAntenna() + " TAG: " + tmp.getTagRFID());
-			}
-		}
-	}
 
 	public static void getObjectRepresentation(String response)
 			throws UnknownHostException, IOException, SessionFullException {
@@ -74,6 +55,7 @@ public class CaptureTagsRepresentation {
 			} else {
 				getInstanceTags().put(tmp.getTagRFID(), tmp);
 				jsonTagUnique = ExportJsonFormat.exportTag(tmp);
+				tag = tmp;
 				jsonRepresentation = ExportJsonFormat.exportListTags(getInstanceTags());
 			}
 		}
@@ -115,6 +97,10 @@ public class CaptureTagsRepresentation {
 
 	public static void setJsonTagUnique(String jsonTagUnique) {
 		CaptureTagsRepresentation.jsonTagUnique = jsonTagUnique;
+	}
+	
+	public static TagAntenna getTag(){
+		return tag;
 	}
 	
 	

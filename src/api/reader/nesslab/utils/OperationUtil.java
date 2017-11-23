@@ -2,7 +2,7 @@ package api.reader.nesslab.utils;
 
 public class OperationUtil {
 	
-	public static final String BUZZER_ON = ">x b 1 /r/n";
+	public static final /*@ non_null @*/ String BUZZER_ON = ">x b 1 /r/n";
 	public static final String BUZZER_OFF = ">x b 0 /r/n";
 	public static final String BUZZER_STATUS = ">y b /r/n";
 	public static final String ANTENNA_STATUS = ">y e /r/n";
@@ -20,7 +20,7 @@ public class OperationUtil {
 	public static final String ONE_TAG_READ = ">e /r /n";
 	public static final int PORT_READER_NESSLAB = 5578;
 	
-	private static String ipReaderNessLab;
+	private static /*@ spec_public @*/ String ipReaderNessLab = "";
 	
 	public static String setScanTime(long time){
 		String timeMS = String.valueOf(time);
@@ -78,6 +78,7 @@ public class OperationUtil {
 	 ipReaderNessLab = ipReaderNesslab;
  }
  
+ //@ pure
  public static String getIpReaderNesslab(){
 	 return ipReaderNessLab;	
  }

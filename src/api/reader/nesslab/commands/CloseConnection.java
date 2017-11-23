@@ -9,7 +9,7 @@ import api.reader.nesslab.utils.OperationUtil;
 
 public class CloseConnection implements Command {
 	
-	private ConnectReader connectReader;
+	private /*@ spec_public @*/ConnectReader connectReader;
 
 	@Override
 	public void execute() throws UnknownHostException, IOException {

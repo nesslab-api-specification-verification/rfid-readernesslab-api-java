@@ -55,9 +55,9 @@
 	<!-- CLASSPATH FOR COMPILATION AND TASKS -->
 	<path id="classpath">
 		<!-- IF YOU HAVE APPLICATION SPECIFIC LIB, UNCOMMENT THE FOLLOWING -->
-		<!--<fileset dir="${app.lib}">
+		<fileset dir="${app.lib}">
 			<include name="*.jar" />
-		</fileset>-->
+		</fileset>
 		<fileset dir="${aspectjml.lib}">
 			<include name="*.jar" />
 		</fileset>

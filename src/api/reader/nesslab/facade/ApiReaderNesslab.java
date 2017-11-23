@@ -32,8 +32,8 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	/**
 	 * Contructor with ip parameter, when the ip is different of default ip.
 	 * @param command is a command of API.
-	 * */
-	public ApiReaderNesslab(String ip){
+	*/
+	public ApiReaderNesslab(/*@ non_null @*/String ip){
 		OperationUtil.setIpReaderNesslab(ip);
 	}
 

@@ -16,15 +16,15 @@ import api.reader.nesslab.exceptions.SessionFullException;
  * */
 public class CaptureTagsRepresentation {
 
-	private static Map<String, TagAntenna> tags;
-	private static TagAntenna tag;
-	private static final String CODE_SUCESS_INVENTORY = "9C01";
-	private static final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
-	private static final String CODE_ERRO_STOP_FORCE = "9S00";
+	private static /*@ spec_public nullable@*/ Map<String, TagAntenna> tags;
+	private static /*@ spec_public nullable@*/ TagAntenna tag;
+	private static /*@ spec_public nullable@*/ final String CODE_SUCESS_INVENTORY = "9C01";
+	private static /*@ spec_public nullable@*/ final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
+	private static /*@ spec_public nullable@*/ final String CODE_ERRO_STOP_FORCE = "9S00";
 	
 	
-	private static String jsonRepresentation = "";
-	private static String jsonTagUnique = "";
+	private static /*@ spec_public @*/ String jsonRepresentation = "";
+	private static /*@ spec_public @*/ String jsonTagUnique = "";
 	
 	
 	private static Map<String, TagAntenna> getInstanceTags(){

@@ -9,7 +9,7 @@ import api.reader.nesslab.utils.TagAntenna;
 
 public interface ApiReaderFacade {
 
-	void executeAction(Command command) throws UnknownHostException, IOException;
+	void executeAction(/*@ non_null @*/Command command) throws UnknownHostException, IOException;
 	
 	String getResponse() throws UnknownHostException, IOException;
 	

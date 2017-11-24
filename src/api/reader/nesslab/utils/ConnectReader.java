@@ -12,10 +12,10 @@ import java.net.UnknownHostException;
  * */
 public class ConnectReader {
 	
-	private /*@ spec_public nullable@*/Socket echo	;
-	private /*@ spec_public nullable@*/PrintWriter out;
-	private /*@ spec_public nullable@*/BufferedReader in;
-	private /*@ spec_public @*/static ConnectReader connectReader;
+	private /*@ spec_public nullable @*/Socket echo	;
+	private /*@ spec_public nullable @*/PrintWriter out;
+	private /*@ spec_public nullable @*/BufferedReader in;
+	private /*@ spec_public nullable @*/static ConnectReader connectReader;
 	
 	private ConnectReader() {
 	}
@@ -29,6 +29,9 @@ public class ConnectReader {
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
 	/* Singleton */
+	/*@assignable connectReader; 
+	 @ensures connectReader!=null;
+	 @*/
 	public synchronized static ConnectReader getInstance(String ip, int port) 
 			throws UnknownHostException, IOException{
 		if(connectReader == null){
@@ -50,6 +53,8 @@ public class ConnectReader {
 	 * The method is used exclusively for API Facade. 
 	 * @param message is the message according with the protocol. 
 	 * **/
+	/*@pure
+	 */
 	public void send(String message){
 		this.out.println(message);
 	}

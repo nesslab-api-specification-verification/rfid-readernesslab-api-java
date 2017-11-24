@@ -20,7 +20,7 @@ public class OperationUtil {
 	public static final String ONE_TAG_READ = ">e /r /n";
 	public static final int PORT_READER_NESSLAB = 5578;
 	
-	private static /*@ spec_public @*/ String ipReaderNessLab = "";
+	private static /*@ spec_public nullable @*/ String ipReaderNessLab;
 	
 	public static String setScanTime(long time){
 		String timeMS = String.valueOf(time);

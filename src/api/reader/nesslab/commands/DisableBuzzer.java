@@ -9,7 +9,8 @@ import api.reader.nesslab.utils.OperationUtil;
 
 public class DisableBuzzer implements Command {
 
-	private /*@ spec_public @*/ConnectReader connectReader;
+	private /*@ spec_public nullable @*/ ConnectReader connectReader; //@ in cR;
+	//@ protected represents cR <- connectReader;
 	
 	@Override
 	public void execute() throws UnknownHostException, IOException {

@@ -9,11 +9,13 @@ import api.reader.nesslab.utils.OperationUtil;
 
 public class EnableAntennas implements Command {
 	
-	private /*@ spec_public @*/ConnectReader connectReader;
+	private /*@ spec_public nullable @*/ ConnectReader connectReader; //@ in cR;
+	//@ protected represents cR <- connectReader;
 	private /*@ spec_public @*/String pattern = "";
 	
-	public EnableAntennas(String pattern) {
-		this.pattern = pattern;
+	//@ensures pattern == p;
+	public EnableAntennas(String p) {
+		this.pattern = p;
 	}
 
 	@Override

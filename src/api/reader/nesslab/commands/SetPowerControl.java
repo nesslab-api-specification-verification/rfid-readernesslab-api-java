@@ -9,11 +9,14 @@ import api.reader.nesslab.utils.OperationUtil;
 
 public class SetPowerControl implements Command {
 	
-	private /*@ spec_public @*/ ConnectReader connectReader;
+	private /*@ spec_public nullable @*/ ConnectReader connectReader; //@ in cR;
+	//@ protected represents cR <- connectReader;
+	
 	private /*@ spec_public @*/ String power = "";
 	
-	public SetPowerControl(String power) {
-		this.power = power; 
+	//@ensures power == p;
+	public SetPowerControl(String p) {
+		this.power = p; 
 	}
 
 	@Override

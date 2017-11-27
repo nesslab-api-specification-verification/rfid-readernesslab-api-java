@@ -29,7 +29,9 @@ public class ConnectReader {
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
 	/* Singleton */
-	//@ ensures connectReader != null;
+	/*@assignable connectReader; 
+	 @ensures connectReader!=null;
+	 @*/
 	public synchronized static ConnectReader getInstance(String ip, int port) 
 			throws UnknownHostException, IOException{
 		if(connectReader == null){
@@ -51,6 +53,8 @@ public class ConnectReader {
 	 * The method is used exclusively for API Facade. 
 	 * @param message is the message according with the protocol. 
 	 * **/
+	/*@pure
+	 */
 	public void send(String message){
 		this.out.println(message);
 	}

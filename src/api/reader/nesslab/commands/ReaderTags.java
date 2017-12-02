@@ -9,7 +9,7 @@ import api.reader.nesslab.utils.OperationUtil;
 
 public class ReaderTags implements Command {
 
-	private /*@ spec_public @*/ ConnectReader connectReader;
+	private /*@ spec_public nullable @*/ ConnectReader connectReader;
 	
 	@Override
 	public void execute() throws UnknownHostException, IOException {

@@ -14,9 +14,13 @@ public class SetPowerControl implements Command {
 	
 	private /*@ spec_public @*/ String power = "";
 	
-	//@ensures power == p;
-	public SetPowerControl(String p) {
-		this.power = p; 
+	/*@
+	 @requires power!=null;
+	 @assignable power;
+	 @ensures this.power == power;
+	 @*/
+	public SetPowerControl(String power) {
+		this.power = power; 
 	}
 
 	@Override

@@ -7,7 +7,8 @@ import api.reader.nesslab.utils.ConnectReader;
 import api.reader.nesslab.utils.OperationUtil;
 public class OneTagReader implements Command {
 	
-	private /*@ spec_public nullable @*/ ConnectReader connectReader;
+	private /*@ spec_public nullable @*/ ConnectReader connectReader; //@ in cR;
+	//@ protected represents cR <- connectReader;
 	@Override
 	public void execute() throws UnknownHostException, IOException {
 		this.connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);

@@ -1,0 +1,24 @@
+A entrega dos projetos se dará nos dias 04/12/2017 e 06/12/2017 no horário normal da aula. A entrega do projeto será feita através de uma apresentação para o professor. Nesta apresentação, serão solicitados os seguintes itens:
+- Descrição do problema
+- Diagrama de Classes do Projeto
+- Principais partes do código fonte anotado
+- Sistema sendo executado demonstrando o funcionamento das anotações
+Na tarefa do SIGAA você deve entregar um arquivo compactado contendo:
+1) Projeto Java com as Anotações JML a ser apresentado na entrega
+2) Arquivo contendo as quantidades dos seguintes itens (MODELO EM ANEXO):
+    Número de Classes -> 28
+    Quantidade de Métodos -> 79
+    Herança e Interface -> 2
+    LOC
+    invariant
+    initially
+    constraint	
+    assignable
+    requires
+    ensures
+    behaviour (normal and exceptional)
+    \forall
+    \exists
+    Modelos (represents) -> 1
+    behaviour subtyping
+A ordem da apresentação será definida durante as aulas. 

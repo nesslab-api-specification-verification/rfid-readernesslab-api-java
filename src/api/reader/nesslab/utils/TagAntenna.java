@@ -2,10 +2,10 @@ package api.reader.nesslab.utils;
 
 public class TagAntenna {
 
-	private /*@ nullable @*/ String uniqID;
-	private /*@ nullable @*/ String antenna;	
-	private /*@ nullable @*/ String tagRFID;
-	private long countReader;
+	private /*@ spec_public nullable @*/ String uniqID;
+	private /*@ spec_public nullable @*/ String antenna;	
+	private /*@ spec_public nullable @*/ String tagRFID;
+	private /*@ spec_public@*/ long countReader;
 	
 	public TagAntenna(String uniqID) {
 		this.uniqID = uniqID;
@@ -17,10 +17,12 @@ public class TagAntenna {
 		}
 	}
 
-	public String getAntenna() {
+	public /*@ pure @*/String getAntenna() {
 		return antenna;
 	}
-
+	
+	//@ assignable this.antenna;
+	//@ ensures this.antenna == antenna;
 	public void setAntenna(String antenna) {
 		this.antenna = antenna;
 	}

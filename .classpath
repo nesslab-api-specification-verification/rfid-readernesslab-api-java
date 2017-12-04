@@ -5,6 +5,5 @@
 	<classpathentry kind="lib" path="lib/gson.jar"/>
 	<classpathentry kind="lib" path="aspectjml-lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="aspectjml-lib/aspectjml-release1.8.0.jar"/>
-	<classpathentry kind="var" path="OPENJML_RUNTIME_LIBRARY"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

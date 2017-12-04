@@ -12,9 +12,9 @@ import java.net.UnknownHostException;
  * */
 public class ConnectReader {
 	
-	private /*@ spec_public nullable @*/Socket echo	;
-	private /*@ spec_public nullable @*/PrintWriter out;
-	private /*@ spec_public nullable @*/BufferedReader in;
+	private /*@ spec_public nullable@*/Socket echo	;
+	private /*@ spec_public nullable@*/PrintWriter out;
+	private /*@ spec_public nullable@*/BufferedReader in;
 	private /*@ spec_public nullable @*/static ConnectReader connectReader;
 	
 	private ConnectReader() {

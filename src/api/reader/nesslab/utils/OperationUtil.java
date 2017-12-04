@@ -1,8 +1,8 @@
 package api.reader.nesslab.utils;
 
 public class OperationUtil {
-	
-	public static final /*@ non_null @*/ String BUZZER_ON = ">x b 1 /r/n";
+
+	public static final /* @ non_null @ */ String BUZZER_ON = ">x b 1 /r/n";
 	public static final String BUZZER_OFF = ">x b 0 /r/n";
 	public static final String BUZZER_STATUS = ">y b /r/n";
 	public static final String ANTENNA_STATUS = ">y e /r/n";
@@ -19,28 +19,27 @@ public class OperationUtil {
 	public static final String MULTI_TAG_READ_RESET = ">g /r /n";
 	public static final String ONE_TAG_READ = ">e /r /n";
 	public static final int PORT_READER_NESSLAB = 5578;
-	
-	private static /*@ spec_public nullable @*/ String ipReaderNessLab;
-	
-	public static String setScanTime(long time){
+
+	private static /*@ spec_public @*/ String ipReaderNessLab = "";
+
+	public static String setScanTime(long time) {
 		String timeMS = String.valueOf(time);
 		return ">x t " + timeMS + "/r/n";
-	}	
-	
-	public static String setPowerControl(String power){
-		return ">x p "+ power + "/r/n";
 	}
-	
-	public static String setIpAdress(String ip){
-		return ">x r"+ ip + "/r/n";
+
+	public static String setPowerControl(String power) {
+		return ">x p " + power + "/r/n";
 	}
-	
-	
-	//pattern: 0 0 0 0
-	public static String enableAntennas(String antennas){
+
+	public static String setIpAdress(String ip) {
+		return ">x r" + ip + "/r/n";
+	}
+
+	// pattern: 0 0 0 0
+	public static String enableAntennas(String antennas) {
 		switch (antennas) {
 		case "0 0 0 1":
-			return ">x e 1 /r/n";			
+			return ">x e 1 /r/n";
 		case "0 0 1 0":
 			return ">x e 2 /r/n";
 		case "0 0 1 1":
@@ -73,13 +72,16 @@ public class OperationUtil {
 			return "invalid command.";
 		}
 	}
-	
- public static void setIpReaderNesslab(String ipReaderNesslab){
-	 ipReaderNessLab = ipReaderNesslab;
- }
- 
- //@ pure
- public static String getIpReaderNesslab(){
-	 return ipReaderNessLab;	
- }
+
+	/*@requires ip != null;
+	 @ensures ipReaderNessLab == ip; 
+	 @*/
+	public static void setIpReaderNesslab(String ip) {
+		ipReaderNessLab = ip;
+	}
+
+	// @ pure
+	public static String getIpReaderNesslab() {
+		return ipReaderNessLab;
+	}
 }

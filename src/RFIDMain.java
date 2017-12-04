@@ -11,7 +11,7 @@ import api.reader.nesslab.interfaces.ApiReaderFacade;
 import api.reader.nesslab.utils.*;
 public class RFIDMain {
 	
-	 //@ requires args != null ;
+	 
 	public static void main(String[] args) {		
 		try {
 			
@@ -19,7 +19,7 @@ public class RFIDMain {
 			 * new connection with the Nesslab is opened. */
 			ApiReaderFacade api = new ApiReaderNesslab("10.7.125.7");
 			api.defaultConfiguration();
-			api.clearTemporaryMemory(200);//Clean memory of 2 in 2 minutes.
+			api.clearTemporaryMemory(20);//Clean memory of 2 in 2 minutes.
 			
 			
 			api.executeAction(new ReaderTags());

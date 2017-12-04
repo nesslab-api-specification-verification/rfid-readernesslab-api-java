@@ -11,8 +11,11 @@ public class SetScanTime implements Command {
 	
 	private /*@ spec_public @*/long time;
 	
+	
+	
 	private /*@ spec_public nullable@*/ConnectReader connectReader; //@ in cR;
-	//@ protected represents cR <- connectReader;
+	
+	//@ public represents cR <- connectReader;
 	
 	/* @requires t >= 0;
 	 @assert time >= 0;

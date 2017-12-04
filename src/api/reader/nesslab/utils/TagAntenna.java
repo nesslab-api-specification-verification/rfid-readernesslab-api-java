@@ -17,10 +17,12 @@ public class TagAntenna {
 		}
 	}
 
-	public String getAntenna() {
+	public /*@ pure @*/String getAntenna() {
 		return antenna;
 	}
-
+	
+	//@ assignable this.antenna;
+	//@ ensures this.antenna == antenna;
 	public void setAntenna(String antenna) {
 		this.antenna = antenna;
 	}

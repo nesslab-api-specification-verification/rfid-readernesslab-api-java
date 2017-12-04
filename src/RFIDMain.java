@@ -11,7 +11,7 @@ import api.reader.nesslab.interfaces.ApiReaderFacade;
 import api.reader.nesslab.utils.*;
 public class RFIDMain {
 	
-	 //@ requires args != null ;
+	 
 	public static void main(String[] args) {		
 		try {
 			

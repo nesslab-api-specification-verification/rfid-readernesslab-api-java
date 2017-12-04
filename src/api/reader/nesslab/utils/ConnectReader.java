@@ -29,8 +29,15 @@ public class ConnectReader {
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
 	/* Singleton */
-	/*@assignable connectReader; 
-	 @ensures connectReader!=null;
+	/*@
+	 @ public normal_behaviour
+	 @  assignable connectReader; 
+	 @  ensures connectReader!=null;
+	 @also
+	 @ public exceptional_behaviour
+	 @  requires ip.equals("") || ip.equals(null) || ip.isEmpty() || port==0 || port>65535;
+	 @  assignable connectReader;
+	 @  signals_only UnknownHostException;
 	 @*/
 	public synchronized static ConnectReader getInstance(String ip, int port) 
 			throws UnknownHostException, IOException{
@@ -53,9 +60,7 @@ public class ConnectReader {
 	 * The method is used exclusively for API Facade. 
 	 * @param message is the message according with the protocol. 
 	 * **/
-	/*@pure
-	 */
-	public void send(String message){
+	public /*@ pure @*/void send(String message){
 		this.out.println(message);
 	}
 	

@@ -17,7 +17,8 @@ public class TagAntenna {
 		}
 	}
 
-	public /*@ pure @*/String getAntenna() {
+	//@ ensures \result == this.antenna;
+	public /*@ pure @*/ String getAntenna() {
 		return antenna;
 	}
 	
@@ -27,41 +28,60 @@ public class TagAntenna {
 		this.antenna = antenna;
 	}
 
+	//@ ensures \result == this.tagRFID;
 	public String getTagRFID() {
 		return tagRFID;
 	}
 
+	//@ assignable this.tagRFID;
+	//@ ensures this.tagRFID == tagRFID;
 	public void setTagRFID(String tagRFID) {
 		this.tagRFID = tagRFID;
 	}
 
-	public long getCountReader() {
+	//@ ensures \result == this.countReader;
+	public /*@ pure @*/long getCountReader() {
 		return countReader;
 	}
 
+	//@ assignable countReader;
+	//@ ensures this.countReader == countReader;
 	public void setCountReader(long countReader) {
 		this.countReader = countReader;
 	}
 	
+	//@ assignable countReader;
+	//@ ensures this.countReader == \old(this.countReader)+1;
 	public void incrementCounter() {
 		this.setCountReader(this.getCountReader() + 1); 
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	/*@ 
+	 @ also
+	 @  requires this == obj || (tagRFID==null && ((TagAntenna) obj).tagRFID==null);
+	 @  ensures \result == true;
+	 @ also
+	 @  requires obj == null || getClass() != obj.getClass() || (tagRFID==null && ((TagAntenna) obj).tagRFID!=null) || (tagRFID!=null && !tagRFID.equals(((TagAntenna) obj).tagRFID) );
+	 @  ensures \result == false;
+	 @*/
+	public /*@ pure @*/ boolean equals(Object obj) {
+		boolean teste = true;
 		if (this == obj)
-			return true;
+			teste = true;
 		if (obj == null)
-			return false;
+			teste = false;
 		if (getClass() != obj.getClass())
-			return false;
+			teste = false;
 		TagAntenna other = (TagAntenna) obj;
 		if (tagRFID == null) {
 			if (other.tagRFID != null)
-				return false;
+				teste = false;
 		} else if (!tagRFID.equals(other.tagRFID))
-			return false;
-		return true;
+			teste = false;
+		else
+			teste = true;
+		return teste;
 	}
 	
 	

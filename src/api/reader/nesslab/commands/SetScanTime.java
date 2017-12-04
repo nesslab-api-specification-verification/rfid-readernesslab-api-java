@@ -25,6 +25,11 @@ public class SetScanTime implements Command {
 		this.time = t;
 	}
 
+	/*
+	  also
+	   public exceptional_behaviour
+	    signals
+	 */
 	public void execute() throws UnknownHostException, IOException {
 		this.connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		this.connectReader.send(OperationUtil.setScanTime(time));

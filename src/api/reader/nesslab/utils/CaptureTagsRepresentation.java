@@ -26,7 +26,8 @@ public class CaptureTagsRepresentation {
 	private static /*@ spec_public @*/ String jsonRepresentation = "";
 	private static /*@ spec_public @*/ String jsonTagUnique = "";
 	
-	
+	//@ assignable tags;
+	//@ ensures tags!=null && \result == tags;
 	private static Map<String, TagAntenna> getInstanceTags(){
 		if(tags == null){
 			tags = new HashMap<>();
@@ -34,11 +35,21 @@ public class CaptureTagsRepresentation {
 		return tags;
 	}
 	
-	public static boolean verifyTagExists(String key){
+	//@ ensures \result == tags.containsKey(key);
+	public static /*@ pure @*/boolean verifyTagExists(String key){
 		return getInstanceTags().containsKey(key);
 	}
 
-
+	/*@
+	 @  public normal_behaviour
+	 @   requires !response.equals(CODE_SUCESS_INVENTORY) && !response.equals(CODE_ERRO_DUPLICATION_EXECUTION) && !response.equals(CODE_ERRO_STOP_FORCE);
+	 @   assignable jsonTagUnique, tag, jsonRepresentation;
+	 @   ensures verifyTagExists(new TagAntenna(response).getTagRFID());
+	 @ also
+	 @  public exceptional_behaviour
+	 @   requires response.equals(CODE_SUCESS_INVENTORY) || response.equals(CODE_ERRO_DUPLICATION_EXECUTION) || response.equals(CODE_ERRO_STOP_FORCE);
+	 @   signals_only SessionFullException;
+	 @*/
 	public static void getObjectRepresentation(String response)
 			throws UnknownHostException, IOException, SessionFullException {
 		TagAntenna tmp;
@@ -74,7 +85,8 @@ public class CaptureTagsRepresentation {
 		}, 0, timeSecondsRange*1000L);
 	}
 
-	public static String getJsonRepresentation() {
+	//@ensures \result.equals(jsonRepresentation);
+	public static /*@ pure @*/String getJsonRepresentation() {
 		return jsonRepresentation;
 	}
 
@@ -87,19 +99,24 @@ public class CaptureTagsRepresentation {
 		return newList;
 	}
 	
-	public static boolean haveNewTag(){
+	//@ensures \result == !jsonTagUnique.equals("");
+	public static /*@ pure @*/boolean haveNewTag(){
 		return !jsonTagUnique.equals("");
 	}
 
-	public static String getJsonTagUnique() {
+	//@ensures \result == jsonTagUnique;
+	public static /*@ pure @*/String getJsonTagUnique() {
 		return jsonTagUnique;
 	}
 
+	//@ assignable CaptureTagsRepresentation.jsonTagUnique;
+	//@ ensures CaptureTagsRepresentation.jsonTagUnique.equals(jsonTagUnique);
 	public static void setJsonTagUnique(String jsonTagUnique) {
 		CaptureTagsRepresentation.jsonTagUnique = jsonTagUnique;
 	}
 	
-	public static TagAntenna getTag(){
+	//@ensures \result == tag;
+	public /*@ pure @*/static TagAntenna getTag(){
 		return tag;
 	}
 	

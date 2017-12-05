@@ -17,19 +17,14 @@ public class SetScanTime implements Command {
 	
 	//@ public represents cR <- connectReader;
 	
-	/* @requires t >= 0;
-	 @assert time >= 0;
-	 @ensures time == t;
+	/*@requires t >= 0;
+	 @ensures time >= 0 && time == t;
 	 @*/
 	public SetScanTime(long t) {
 		this.time = t;
 	}
 
-	/*
-	  also
-	   public exceptional_behaviour
-	    signals
-	 */
+	@Override
 	public void execute() throws UnknownHostException, IOException {
 		this.connectReader = ConnectReader.getInstance(OperationUtil.getIpReaderNesslab(), OperationUtil.PORT_READER_NESSLAB);
 		this.connectReader.send(OperationUtil.setScanTime(time));

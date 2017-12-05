@@ -113,7 +113,7 @@ public class ApiReaderNesslab implements ApiReaderFacade {
 	 * @return Set of tags read.
 	 * */
 	@Override
-	public String getJsonRepresentation() {
+	public /*@ pure @*/ String getJsonRepresentation() {
 		return api.reader.nesslab.utils.CaptureTagsRepresentation.getJsonRepresentation();
 	}
 

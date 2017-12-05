@@ -7,6 +7,15 @@ public class TagAntenna {
 	private /*@ spec_public nullable @*/ String tagRFID;
 	private /*@ spec_public@*/ long countReader;
 	
+	/*@
+	 @  requires !(uniqID.split("T").length == 2);
+	 @  assignable this.uniqID;
+	 @  ensures this.uniqID.equals(uniqID);
+	 @ also
+	 @  requires (uniqID.split("T").length == 2);
+	 @  assignable antenna, tagRFID, countReader;
+	 @  ensures this.uniqID.equals(uniqID) && antenna.equals(uniqID.split("T")[0]) && tagRFID.equals(uniqID.split("T")[1]) && countReader == 1;
+	 @*/
 	public TagAntenna(String uniqID) {
 		this.uniqID = uniqID;
 		String[] tagANDantena = this.uniqID.split("T");
@@ -29,7 +38,7 @@ public class TagAntenna {
 	}
 
 	//@ ensures \result == this.tagRFID;
-	public String getTagRFID() {
+	public /*@ pure @*/String getTagRFID() {
 		return tagRFID;
 	}
 
@@ -57,31 +66,30 @@ public class TagAntenna {
 	}
 
 	@Override
-	/*@ 
-	 @ also
-	 @  requires this == obj || (tagRFID==null && ((TagAntenna) obj).tagRFID==null);
+	/*@also
+	 @  requires this == obj || (tagRFID == null && ((TagAntenna) obj).tagRFID==null) || (tagRFID != null && tagRFID.equals(((TagAntenna) obj).tagRFID));
 	 @  ensures \result == true;
 	 @ also
-	 @  requires obj == null || getClass() != obj.getClass() || (tagRFID==null && ((TagAntenna) obj).tagRFID!=null) || (tagRFID!=null && !tagRFID.equals(((TagAntenna) obj).tagRFID) );
+	 @  requires obj == null || (getClass() != obj.getClass()) || (tagRFID == null && ((TagAntenna) obj).tagRFID!=null) || (tagRFID != null && !tagRFID.equals(((TagAntenna) obj).tagRFID));
 	 @  ensures \result == false;
 	 @*/
 	public /*@ pure @*/ boolean equals(Object obj) {
-		boolean teste = true;
 		if (this == obj)
-			teste = true;
+			return true;
 		if (obj == null)
-			teste = false;
+			return false;
 		if (getClass() != obj.getClass())
-			teste = false;
+			return false;
 		TagAntenna other = (TagAntenna) obj;
 		if (tagRFID == null) {
 			if (other.tagRFID != null)
-				teste = false;
+				return false;
+			else
+				return true;
 		} else if (!tagRFID.equals(other.tagRFID))
-			teste = false;
+			return false;
 		else
-			teste = true;
-		return teste;
+			return true;
 	}
 	
 	

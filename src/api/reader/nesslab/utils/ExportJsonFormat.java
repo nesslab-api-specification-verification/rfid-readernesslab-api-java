@@ -7,9 +7,12 @@ import com.google.gson.JsonObject;
 
 public class ExportJsonFormat {
 	
-	private static final String TAG_ANTENNA = "antenna";
-	private static final String TAG_RFID = "tag";
+	private static /*@ spec_public @*/ final String TAG_ANTENNA = "antenna";
+	//@ public constraint TAG_ANTENNA == \old(TAG_ANTENNA);
+	private static /*@ spec_public @*/ final String TAG_RFID = "tag";
+	//@ public constraint TAG_RFID == \old(TAG_RFID);
 
+	
 	public static String exportListTags(Map<String, TagAntenna> tagsSource){
 		JsonArray jsonArray = new JsonArray();	
 		for(String key: tagsSource.keySet()){

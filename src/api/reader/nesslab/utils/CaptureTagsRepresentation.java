@@ -19,8 +19,11 @@ public class CaptureTagsRepresentation {
 	private static /*@ spec_public nullable@*/ Map<String, TagAntenna> tags;
 	private static /*@ spec_public nullable@*/ TagAntenna tag;
 	private static /*@ spec_public nullable@*/ final String CODE_SUCESS_INVENTORY = "9C01";
+	//@ public constraint CODE_SUCESS_INVENTORY == \old(CODE_SUCESS_INVENTORY);
 	private static /*@ spec_public nullable@*/ final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
+	//@ public constraint CODE_ERRO_DUPLICATION_EXECUTION == \old(CODE_ERRO_DUPLICATION_EXECUTION);
 	private static /*@ spec_public nullable@*/ final String CODE_ERRO_STOP_FORCE = "9S00";
+	//@ public constraint CODE_ERRO_STOP_FORCE == \old(CODE_ERRO_STOP_FORCE);
 	
 	
 	private static /*@ spec_public @*/ String jsonRepresentation = "";

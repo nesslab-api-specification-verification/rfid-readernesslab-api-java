@@ -8,17 +8,17 @@ Na tarefa do SIGAA você deve entregar um arquivo compactado contendo:
 2) Arquivo contendo as quantidades dos seguintes itens (MODELO EM ANEXO):
     Número de Classes -> 28
     Quantidade de Métodos -> 79
-    Herança e Interface -> 2
-    LOC
-    invariant
-    initially
-    constraint	
-    assignable
-    requires
-    ensures
-    behaviour (normal and exceptional)
+    Herança e Interface -> 1H 2I
+    LOC - 1318 linhas
+    invariant -> 1
+    initially -> 0
+    constraint -> 21	
+    assignable -> 16
+    requires -> 38
+    ensures -> 60
+    behaviour (normal and exceptional) 4
     \forall
     \exists
-    Modelos (represents) -> 1
+    Modelos (represents) -> 2 (17)
     behaviour subtyping
 A ordem da apresentação será definida durante as aulas. 

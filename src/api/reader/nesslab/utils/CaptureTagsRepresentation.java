@@ -31,7 +31,7 @@ public class CaptureTagsRepresentation {
 	
 	//@ assignable tags;
 	//@ ensures tags!=null && \result == tags;
-	private static Map<String, TagAntenna> getInstanceTags(){
+	public static Map<String, TagAntenna> getInstanceTags(){
 		if(tags == null){
 			tags = new HashMap<>();
 		}
@@ -39,7 +39,7 @@ public class CaptureTagsRepresentation {
 	}
 	
 	//@ ensures \result == tags.containsKey(key);
-	public static /*@ pure @*/boolean verifyTagExists(String key){
+	private static /*@ spec_public pure @*/boolean verifyTagExists(String key){
 		return getInstanceTags().containsKey(key);
 	}
 
@@ -76,6 +76,7 @@ public class CaptureTagsRepresentation {
 
 	}
 	
+	//@ ensures tags==null || (tags!=null && tags.isEmpty());
 	public static void clearMemory(int timeSecondsRange){
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -93,6 +94,10 @@ public class CaptureTagsRepresentation {
 		return jsonRepresentation;
 	}
 
+	/*@
+	 @ ensures (\forall int i; i>=0 && i< tags.values().size();
+	 @	 			\result.contains(((List)tags.values()).get(i)));
+	 @*/
 	public static List<TagAntenna> getTags() {
 	    List<TagAntenna> newList = new ArrayList<TagAntenna>();
 		for(String key: getInstanceTags().keySet()){

@@ -31,14 +31,8 @@ public class ConnectReader {
 	 * */
 	/* Singleton */
 	/*@
-	 @ public normal_behaviour
 	 @  assignable connectReader; 
 	 @  ensures connectReader!=null;
-	 @also
-	 @ public exceptional_behaviour
-	 @  requires ip==null || ip.equals("") || ip.isEmpty() || port<=0 || port>65535;
-	 @  assignable connectReader;
-	 @  signals_only UnknownHostException, NoRouteToHostException, IOException;
 	 @*/
 	public synchronized static /*@ nullable @*/ConnectReader getInstance(String ip, int port) 
 			throws UnknownHostException, IOException{

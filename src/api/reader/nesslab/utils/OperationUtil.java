@@ -39,20 +39,78 @@ public class OperationUtil {
 
 	private static /*@ spec_public @*/ String ipReaderNessLab = "";
 
+	//@ ensures \result.equals(">x t " + String.valueOf(time) + "/r/n");
 	public static String setScanTime(long time) {
 		String timeMS = String.valueOf(time);
 		return ">x t " + timeMS + "/r/n";
 	}
 
+	//@ ensures \result.equals(">x p " + power + "/r/n");
 	public static String setPowerControl(String power) {
 		return ">x p " + power + "/r/n";
 	}
 
+	//@ ensures \result.equals(">x r" + ip + "/r/n");
 	public static String setIpAdress(String ip) {
 		return ">x r" + ip + "/r/n";
 	}
 
 	// pattern: 0 0 0 0
+
+	/*@ 
+	 @  requires antennas!=null && antennas.equals("0 0 0 1");
+	 @  ensures \result.equals(">x e 1 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 0 1 0");
+	 @  ensures \result.equals(">x e 2 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 0 1 1");
+	 @  ensures \result.equals(">x e 3 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 1 0 0");
+	 @  ensures \result.equals(">x e 4 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 1 0 1");
+	 @  ensures \result.equals(">x e 5 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 1 1 0");
+	 @  ensures \result.equals(">x e 6 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("0 1 1 1");
+	 @  ensures \result.equals(">x e 7 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 0 0 0");
+	 @  ensures \result.equals(">x e 8 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 0 0 1");
+	 @  ensures \result.equals(">x e 9 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 0 1 0");
+	 @  ensures \result.equals(">x e 10 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 0 1 1");
+	 @  ensures \result.equals(">x e 11 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 1 0 0");
+	 @  ensures \result.equals(">x e 12 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 1 0 1");
+	 @  ensures \result.equals(">x e 13 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 1 1 0");
+	 @  ensures \result.equals(">x e 14 /r/n");
+	 @ also
+	 @  requires antennas!=null && antennas.equals("1 1 1 1");
+	 @  ensures \result.equals(">x e 15 /r/n");
+	 @ also
+	 @  requires antennas!=null &&
+	 @		!antennas.equals("0 0 1 0") && !antennas.equals("0 0 1 1") && !antennas.equals("0 1 0 0") && 
+	 @		!antennas.equals("0 1 0 1") && !antennas.equals("0 1 1 0") && !antennas.equals("0 1 1 1") && 
+	 @ 		!antennas.equals("1 0 0 0") && !antennas.equals("1 0 0 1") && !antennas.equals("1 0 1 0") && 
+	 @		!antennas.equals("1 0 1 1") && !antennas.equals("1 1 0 0") && !antennas.equals("1 1 0 1") && 
+	 @		!antennas.equals("1 1 1 0") && !antennas.equals("1 1 1 1") && !antennas.equals("1 1 1 1");
+	 @  ensures \result.equals("invalid command.");
+	 @*/
 	public static String enableAntennas(String antennas) {
 		switch (antennas) {
 		case "0 0 0 1":
@@ -91,14 +149,14 @@ public class OperationUtil {
 	}
 
 	/*@requires ip != null;
+	 @assignable ipReaderNessLab;
 	 @ensures ipReaderNessLab == ip; 
 	 @*/
 	public static void setIpReaderNesslab(String ip) {
 		ipReaderNessLab = ip;
 	}
 
-	// @ pure
-	public static String getIpReaderNesslab() {
+	public static /*@ pure @*/String getIpReaderNesslab() {
 		return ipReaderNessLab;
 	}
 }

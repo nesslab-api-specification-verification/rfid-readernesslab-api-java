@@ -5,8 +5,8 @@ package api.reader.nesslab.utils;
  * This class should translate all responses of requests in reader.
  * */
 public class TranslateResponse {
-	
 
+	
 	/*@
 	 @  requires response != null && response.contains(">b");
 	 @  ensures \result.contains("the power is ");
@@ -127,6 +127,14 @@ public class TranslateResponse {
 	 @ also
 	 @  requires response.split("e")!=null && response.split("e").length>=2 && response.split("e")[1].equals("15");
 	 @  ensures \result.equals("antenna port enable: 1, 2, 3, and 4");
+	 @ also
+	 @  requires response.split("e")!=null && response.split("e").length>=2 && 
+	 @		!response.split("e")[1].equals("1") && !response.split("e")[1].equals("2") && !response.split("e")[1].equals("3") && 
+	 @		!response.split("e")[1].equals("4") && !response.split("e")[1].equals("5") && !response.split("e")[1].equals("6") && 
+	 @ 		!response.split("e")[1].equals("7") && !response.split("e")[1].equals("8") && !response.split("e")[1].equals("9") && 
+	 @		!response.split("e")[1].equals("10") && !response.split("e")[1].equals("11") && !response.split("e")[1].equals("12") && 
+	 @		!response.split("e")[1].equals("13") && !response.split("e")[1].equals("14") && !response.split("e")[1].equals("15");
+	 @  ensures \result.equals("invalid response.");
 	 @*/
 	private static String antennaStatusResponse(String response){
 		String[] message = response.split("e");

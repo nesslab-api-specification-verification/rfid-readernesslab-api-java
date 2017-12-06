@@ -19,26 +19,39 @@ public class CaptureTagsRepresentation {
 	private static /*@ spec_public nullable@*/ Map<String, TagAntenna> tags;
 	private static /*@ spec_public nullable@*/ TagAntenna tag;
 	private static /*@ spec_public nullable@*/ final String CODE_SUCESS_INVENTORY = "9C01";
+	//@ public constraint CODE_SUCESS_INVENTORY == \old(CODE_SUCESS_INVENTORY);
 	private static /*@ spec_public nullable@*/ final String CODE_ERRO_DUPLICATION_EXECUTION = "9C91";
+	//@ public constraint CODE_ERRO_DUPLICATION_EXECUTION == \old(CODE_ERRO_DUPLICATION_EXECUTION);
 	private static /*@ spec_public nullable@*/ final String CODE_ERRO_STOP_FORCE = "9S00";
-	
+	//@ public constraint CODE_ERRO_STOP_FORCE == \old(CODE_ERRO_STOP_FORCE);
 	
 	private static /*@ spec_public @*/ String jsonRepresentation = "";
 	private static /*@ spec_public @*/ String jsonTagUnique = "";
 	
-	
-	private static Map<String, TagAntenna> getInstanceTags(){
+	//@ assignable tags;
+	//@ ensures tags!=null && \result == tags;
+	public static Map<String, TagAntenna> getInstanceTags(){
 		if(tags == null){
 			tags = new HashMap<>();
 		}
 		return tags;
 	}
-	
-	public static boolean verifyTagExists(String key){
+	 
+	//@ ensures \result <==> tags.containsKey(key);
+	private static /*@ spec_public pure @*/boolean verifyTagExists(String key){
 		return getInstanceTags().containsKey(key);
 	}
 
-
+	/*@
+	 @  public normal_behaviour
+	 @   requires !response.equals(CODE_SUCESS_INVENTORY) && !response.equals(CODE_ERRO_DUPLICATION_EXECUTION) && !response.equals(CODE_ERRO_STOP_FORCE);
+	 @   assignable jsonTagUnique, tag, jsonRepresentation;
+	 @   ensures verifyTagExists(new TagAntenna(response).getTagRFID());
+	 @ also
+	 @  public exceptional_behaviour
+	 @   requires response.equals(CODE_SUCESS_INVENTORY) || response.equals(CODE_ERRO_DUPLICATION_EXECUTION) || response.equals(CODE_ERRO_STOP_FORCE);
+	 @   signals_only SessionFullException;
+	 @*/
 	public static void getObjectRepresentation(String response)
 			throws UnknownHostException, IOException, SessionFullException {
 		TagAntenna tmp;
@@ -62,6 +75,7 @@ public class CaptureTagsRepresentation {
 
 	}
 	
+	//@ ensures tags==null || (tags!=null && tags.isEmpty());
 	public static void clearMemory(int timeSecondsRange){
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -74,10 +88,15 @@ public class CaptureTagsRepresentation {
 		}, 0, timeSecondsRange*1000L);
 	}
 
-	public static String getJsonRepresentation() {
+	//@ensures \result.equals(jsonRepresentation);
+	public static /*@ pure @*/String getJsonRepresentation() {
 		return jsonRepresentation;
 	}
 
+	/*@
+	 @ ensures (\forall int i; i>=0 && i< tags.values().size();
+	 @	 			\result.contains(((List)tags.values()).get(i)));
+	 @*/
 	public static List<TagAntenna> getTags() {
 	    List<TagAntenna> newList = new ArrayList<TagAntenna>();
 		for(String key: getInstanceTags().keySet()){
@@ -87,19 +106,24 @@ public class CaptureTagsRepresentation {
 		return newList;
 	}
 	
-	public static boolean haveNewTag(){
+	//@ensures \result == !jsonTagUnique.equals("");
+	public static /*@ pure @*/boolean haveNewTag(){
 		return !jsonTagUnique.equals("");
 	}
 
-	public static String getJsonTagUnique() {
+	//@ensures \result == jsonTagUnique;
+	public static /*@ pure @*/String getJsonTagUnique() {
 		return jsonTagUnique;
 	}
 
+	//@ assignable CaptureTagsRepresentation.jsonTagUnique;
+	//@ ensures CaptureTagsRepresentation.jsonTagUnique.equals(jsonTagUnique);
 	public static void setJsonTagUnique(String jsonTagUnique) {
 		CaptureTagsRepresentation.jsonTagUnique = jsonTagUnique;
 	}
 	
-	public static TagAntenna getTag(){
+	//@ensures \result == tag;
+	public /*@ pure @*/static TagAntenna getTag(){
 		return tag;
 	}
 	

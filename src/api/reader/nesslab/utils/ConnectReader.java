@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+//@ model import java.net.NoRouteToHostException;
 
 /**
  * The class is responsible for open connection and to send messages for the hardware Reader Nesslab. 
@@ -29,10 +30,11 @@ public class ConnectReader {
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
 	/* Singleton */
-	/*@assignable connectReader; 
-	 @ensures connectReader!=null;
+	/*@
+	 @  assignable connectReader; 
+	 @  ensures connectReader!=null;
 	 @*/
-	public synchronized static ConnectReader getInstance(String ip, int port) 
+	public synchronized static /*@ nullable @*/ConnectReader getInstance(String ip, int port) 
 			throws UnknownHostException, IOException{
 		if(connectReader == null){
 			connectReader = new ConnectReader();
@@ -53,9 +55,7 @@ public class ConnectReader {
 	 * The method is used exclusively for API Facade. 
 	 * @param message is the message according with the protocol. 
 	 * **/
-	/*@pure
-	 */
-	public void send(String message){
+	public /*@ pure @*/void send(String message){
 		this.out.println(message);
 	}
 	
@@ -63,7 +63,7 @@ public class ConnectReader {
 	 * Method used for to return a response of hardware reader.
 	 * @return response of hardware reader. 
 	 * */
-	public String getResponse() throws IOException{
+	public /*@ pure @*/String getResponse() throws IOException{
 			return in.readLine();
 	}
 	
@@ -72,7 +72,7 @@ public class ConnectReader {
 	 * @return true if exists any response, false if not exist. 
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
-	public boolean hasResponse() throws IOException{
+	public /*@ pure @*/boolean hasResponse() throws IOException{
 		return in.read() > 1? true: false;
 	}
 	
@@ -80,7 +80,8 @@ public class ConnectReader {
 	 * Method used for to return the socket of connection with the reader.
 	 * @return Socket connection with reader.  
 	 * */
-	public Socket getConnection(){
+	//@ ensures \result==echo;
+	public /*@ pure @*/Socket getConnection(){
 		return echo;
 	}
 	
@@ -88,20 +89,31 @@ public class ConnectReader {
 	 * Method used for to close connection with the hardware reader.
 	 * @throws IOException Is trown when any failure I/O ocurred.
 	 * */
+	//@ensures echo.isClosed();
 	public void closeConnection() throws IOException{
 		out.close();
 		in.close();
 		echo.close();
 	}
 	
+	/*@
+	 @ assignable this.echo;
+	 @ ensures this.echo == echo; 
+	 @*/
 	private void setEcho(Socket echo){
 		this.echo = echo;
 	}
-	
+
+	/*@
+	 @ assignable this.out;
+	 @ ensures this.out == out; 
+	 @*/
 	private void setOut(PrintWriter out){
 		this.out = out;
 	}
 	
+	//@assignable this.in;
+	//@ ensures this.in == in;
 	private void setIn(BufferedReader in){
 		this.in = in;
 	}

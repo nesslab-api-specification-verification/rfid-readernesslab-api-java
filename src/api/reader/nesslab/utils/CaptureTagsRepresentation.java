@@ -25,7 +25,6 @@ public class CaptureTagsRepresentation {
 	private static /*@ spec_public nullable@*/ final String CODE_ERRO_STOP_FORCE = "9S00";
 	//@ public constraint CODE_ERRO_STOP_FORCE == \old(CODE_ERRO_STOP_FORCE);
 	
-	
 	private static /*@ spec_public @*/ String jsonRepresentation = "";
 	private static /*@ spec_public @*/ String jsonTagUnique = "";
 	
@@ -37,8 +36,8 @@ public class CaptureTagsRepresentation {
 		}
 		return tags;
 	}
-	
-	//@ ensures \result == tags.containsKey(key);
+	 
+	//@ ensures \result <==> tags.containsKey(key);
 	public static /*@ pure @*/boolean verifyTagExists(String key){
 		return getInstanceTags().containsKey(key);
 	}

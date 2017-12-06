@@ -12,15 +12,25 @@ public class ExportJsonFormat {
 	private static /*@ spec_public @*/ final String TAG_RFID = "tag";
 	//@ public constraint TAG_RFID == \old(TAG_RFID);
 
+	private /*@ spec_public @*/static  JsonArray jsonArray = new JsonArray();	
 	
+
+
+	
+	/* @ assignable jsonArray; 
+	@ ensures (\forall int i; 
+	@				i >= 0 && i < (tagsSource.keySet().size());
+	@			  		jsonArray.get(i) != null
+	@			);
+	@*/
 	public static String exportListTags(Map<String, TagAntenna> tagsSource){
-		JsonArray jsonArray = new JsonArray();	
+		jsonArray = new JsonArray();	
 		for(String key: tagsSource.keySet()){
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty(TAG_ANTENNA, tagsSource.get(key).getAntenna());
 			jsonObject.addProperty(TAG_RFID, tagsSource.get(key).getTagRFID());
 			jsonArray.add(jsonObject);
-		}
+		}	
 		
 		return jsonArray.toString();
 	}
